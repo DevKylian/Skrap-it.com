@@ -1,0 +1,34 @@
+<svg id="White" xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M114.722,113.979h43.089V684.536H114.722V113.979Z"/>
+  <path class="cls-1" d="M114.722,639.961H685.278v44.575H114.722V639.961Z"/>
+  <path class="cls-1" d="M9.228,222.444H116.207v43.089H9.228V222.444Z"/>
+  <path class="cls-1" d="M52.317,378.456h63.89V423.03H52.317V378.456Z"/>
+  <path class="cls-1" d="M9.228,534.467H116.207v44.575H9.228V534.467Z"/>
+  <path class="cls-1" d="M220.215,683.05H263.3V790.029H220.215V683.05Z"/>
+  <path class="cls-1" d="M377.713,684.536h44.574v63.89H377.713v-63.89Z"/>
+  <path class="cls-1" d="M535.21,684.536h44.575V791.515H535.21V684.536Z"/>
+  <path class="cls-1" d="M114.722,113.979H306.393v43.089H114.722V113.979Z"/>
+  <path class="cls-1" d="M261.818,8.485h44.575V157.068H261.818V8.485Z"/>
+  <path class="cls-1" d="M368.8,51.574h44.574V157.068H368.8V51.574Z"/>
+  <path class="cls-1" d="M368.333,113.979H685.278v43.089H368.333V113.979Z"/>
+  <path class="cls-1" d="M640.7,155.582h44.574v423.46H640.7V155.582Z"/>
+  <path class="cls-1" d="M683.793,222.444H790.772v43.089H683.793V222.444Z"/>
+  <path class="cls-1" d="M683.793,378.456h63.89V423.03h-63.89V378.456Z"/>
+  <path class="cls-1" d="M683.793,534.467H790.772v44.575H683.793V534.467Z"/>
+  <path class="cls-1" d="M492.121,8.485H536.7V157.068H492.121V8.485Z"/>
+  <path id="Rectangle_28_copie_3" data-name="Rectangle 28 copie 3" class="cls-1" d="M536.417,219.472h43.089v359.57H536.417V219.472Z"/>
+  <rect class="cls-2" x="220.219" y="219.469" width="359.562" height="43.093"/>
+  <path id="Forme_1_1" data-name="Forme 1 1" class="cls-1" d="M220,220l43,42.011V579.094H220V220Z"/>
+  <path id="Forme_1_1_copie" data-name="Forme 1 1 copie" class="cls-1" d="M579.219,579.031l-42.026-43H220v43H579.219Z"/>
+</svg>
