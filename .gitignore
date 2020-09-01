@@ -1,0 +1,7 @@
+.idea
+.docker/cache
+.docker/php-fpm/etc/php/7.4/cli/conf.d 
+.docker/php-fpm/etc/php/7.4/fpm/conf.d 
+.composer
+.bash_history
+/scraping
