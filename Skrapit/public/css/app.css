@@ -1,0 +1,9 @@
+html, body {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+body.dashboard {
+    background-color: #f2f6fe;
+}
+
