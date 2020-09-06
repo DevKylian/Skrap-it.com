@@ -47,6 +47,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Package::class);
     }
 
+    public function tokens()
+    {
+        return $this->hasMany(Token::class);
+    }
+
     /*
      *
      * Below, all the JWT default functions
@@ -96,6 +101,11 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->package_id;
     }
 
+    public function getUserByEmail($email)
+    {
+        return User::where('email', $email)->first();
+    }
+
     /**
      * @param User $user
      * @return mixed
@@ -109,7 +119,18 @@ class User extends Authenticatable implements JWTSubject
      * @param User $user
      * @return mixed
      */
-    public function countApis(User $user) {
+    public function countApis(User $user)
+    {
         return Api::where('user_id', $user->getId())->count();
+    }
+
+    public function isBanned()
+    {
+        return $this->status == 2;
+    }
+
+    public function isActivated()
+    {
+        return $this->status == 1;
     }
 }

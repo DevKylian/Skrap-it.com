@@ -2194,100 +2194,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
@@ -2934,39 +2840,6 @@ var render = function() {
                               ]
                             ),
                         _vm._v(" "),
-                        _c(
-                          "li",
-                          {
-                            staticClass:
-                              "dropdown notification-list topbar-dropdown"
-                          },
-                          [
-                            _vm._m(1),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "dropdown-menu dropdown-menu-right dropdown-lg sshadow",
-                                staticStyle: {
-                                  position: "absolute",
-                                  transform: "translate3d(-269px, 70px, 0px)",
-                                  top: "0px",
-                                  left: "0px",
-                                  "will-change": "transform"
-                                },
-                                attrs: { "x-placement": "bottom-end" },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                  }
-                                }
-                              },
-                              [_vm._m(2), _vm._v(" "), _vm._m(3)]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
                         _c("div", { staticClass: "dropdown profile_log" }, [
                           _c(
                             "div",
@@ -2994,7 +2867,7 @@ var render = function() {
                                   _vm._v(_vm._s(_vm.getUser.email))
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(4)
+                                _vm._m(1)
                               ])
                             ]
                           ),
@@ -3183,225 +3056,6 @@ var staticRenderFns = [
           staticClass: "mobile",
           attrs: { src: "/img/brand/icon-colors.svg", alt: "" }
         })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "nav-link dropdown-toggle",
-        attrs: {
-          "data-toggle": "dropdown",
-          role: "button",
-          "aria-haspopup": "false",
-          "aria-expanded": "true"
-        }
-      },
-      [
-        _c("i", { staticClass: "fad fa-bell noti-icon" }),
-        _vm._v(" "),
-        _c("span", {
-          staticClass: "badge sbadge-red rounded-circle noti-icon-badge"
-        })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-item noti-title" }, [
-      _c("h5", { staticClass: "m-0" }, [
-        _c("span", { staticClass: "float-right" }, [
-          _c("a", { staticClass: "text-dark", attrs: { href: "" } }, [
-            _c("small", [_vm._v("Clear All")])
-          ])
-        ]),
-        _vm._v(
-          "Notifications\n                                                "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "noti-scroll", attrs: { "data-simplebar": "init" } },
-      [
-        _c(
-          "div",
-          { staticClass: "simplebar-wrapper", staticStyle: { margin: "0px" } },
-          [
-            _c(
-              "div",
-              { staticClass: "simplebar-height-auto-observer-wrapper" },
-              [_c("div", { staticClass: "simplebar-height-auto-observer" })]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "simplebar-mask" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "simplebar-offset",
-                  staticStyle: { right: "0px", bottom: "0px" }
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "simplebar-content-wrapper",
-                      staticStyle: { height: "auto", overflow: "hidden scroll" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "simplebar-content",
-                          staticStyle: { padding: "0px" }
-                        },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dropdown-item notify-item",
-                              attrs: { href: "#" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "notify-icon sbg-red" },
-                                [
-                                  _c("i", {
-                                    staticClass: "fad fa-user-plus fa-sm"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "notify-details" }, [
-                                _vm._v(
-                                  "New user\n                                                                            registered.\n                                                                            "
-                                ),
-                                _c("small", { staticClass: "text-muted" }, [
-                                  _vm._v(
-                                    "1 hour\n                                                                                ago"
-                                  )
-                                ])
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dropdown-item notify-item",
-                              attrs: { href: "#" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "notify-icon sbg-orange" },
-                                [
-                                  _c("i", {
-                                    staticClass: "fad fa-project-diagram fa-sm"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "notify-details" }, [
-                                _vm._v(
-                                  "\n                                                                            You have reached 80% of your API's consumption\n                                                                            "
-                                ),
-                                _c("small", { staticClass: "text-muted" }, [
-                                  _vm._v(
-                                    "\n                                                                                2 hours ago"
-                                  )
-                                ])
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dropdown-item notify-item",
-                              attrs: { href: "#" }
-                            },
-                            [
-                              _c(
-                                "div",
-                                { staticClass: "notify-icon sbg-dark" },
-                                [
-                                  _c("i", {
-                                    staticClass: "fad fa-envelope fa-sm"
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "notify-details" }, [
-                                _vm._v(
-                                  "\n                                                                            You need to active your account\n                                                                            "
-                                ),
-                                _c("small", { staticClass: "text-muted" }, [
-                                  _vm._v(
-                                    "\n                                                                                2 hours ago\n                                                                            "
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", {
-              staticClass: "simplebar-placeholder",
-              staticStyle: { width: "auto", height: "440px" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "simplebar-track simplebar-horizontal",
-            staticStyle: { visibility: "hidden" }
-          },
-          [
-            _c("div", {
-              staticClass: "simplebar-scrollbar",
-              staticStyle: { width: "0px", display: "none" }
-            })
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "simplebar-track simplebar-vertical",
-            staticStyle: { visibility: "visible" }
-          },
-          [
-            _c("div", {
-              staticClass: "simplebar-scrollbar",
-              staticStyle: {
-                height: "120px",
-                display: "block",
-                transform: "translate3d(0px, 0px, 0px)"
-              }
-            })
-          ]
-        )
       ]
     )
   },
@@ -21537,7 +21191,7 @@ var routes = [{
 }, {
   path: '/login',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/auth/Login */ "./resources/js/views/auth/Login.vue"));
+    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/auth/Login */ "./resources/js/views/auth/Login.vue"));
   },
   name: 'Login',
   meta: {
@@ -21547,7 +21201,7 @@ var routes = [{
 }, {
   path: '/register',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../views/auth/Register */ "./resources/js/views/auth/Register.vue"));
+    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/auth/Register */ "./resources/js/views/auth/Register.vue"));
   },
   name: 'Register',
   meta: {
@@ -21567,7 +21221,7 @@ var routes = [{
 }, {
   path: '/packages',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../views/dashboard/Packages */ "./resources/js/views/dashboard/Packages.vue"));
+    return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ../views/dashboard/Packages */ "./resources/js/views/dashboard/Packages.vue"));
   },
   name: 'Packages',
   meta: {
@@ -21577,7 +21231,7 @@ var routes = [{
 }, {
   path: '/support',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../views/dashboard/Support */ "./resources/js/views/dashboard/Support.vue"));
+    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../views/dashboard/Support */ "./resources/js/views/dashboard/Support.vue"));
   },
   name: 'Support',
   meta: {
@@ -21597,7 +21251,7 @@ var routes = [{
 }, {
   path: '/admin',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ../views/dashboard/Admin */ "./resources/js/views/dashboard/Admin.vue"));
+    return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ../views/dashboard/Admin */ "./resources/js/views/dashboard/Admin.vue"));
   },
   name: 'Admin',
   meta: {
@@ -21606,8 +21260,38 @@ var routes = [{
     requiresAdmin: true
   }
 }, {
+  path: '/request-email/:form',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ../views/auth/RequestEmail */ "./resources/js/views/auth/RequestEmail.vue"));
+  },
+  name: 'Request Email',
+  meta: {
+    title: 'Request Email',
+    requiresGuest: true
+  }
+}, {
+  path: '/activate/:token',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ../views/auth/Activate */ "./resources/js/views/auth/Activate.vue"));
+  },
+  name: 'Activate',
+  meta: {
+    title: 'Activate',
+    requiresGuest: true
+  }
+}, {
+  path: '/reset-password/:token',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ../views/auth/ResetPassword */ "./resources/js/views/auth/ResetPassword.vue"));
+  },
+  name: 'Reset Password',
+  meta: {
+    title: 'Reset Password',
+    requiresGuest: true
+  }
+}, {
   path: '*',
-  redirect: '/'
+  redirect: '/login'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -21695,7 +21379,7 @@ var actions = {
 
         resolve(res);
       })["catch"](function (err) {
-        reject(err.response.data.error);
+        reject(err.response.data.errors);
       });
     });
   }
@@ -21750,7 +21434,7 @@ var actions = {
         resolve(resp);
       })["catch"](function (err) {
         localStorage.removeItem('token');
-        reject(err.response.data.error);
+        reject(err.response.data.errors);
       });
     });
   },

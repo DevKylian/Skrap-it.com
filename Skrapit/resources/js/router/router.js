@@ -14,7 +14,11 @@ const routes = [
     { path: '/apis', component: () => import('../views/dashboard/Apis'), name: 'Apis', meta: { title: 'Apis', requiresAuth: true } },
     { path: '/admin', component: () => import('../views/dashboard/Admin'), name: 'Admin', meta: { title: 'Admin', requiresAuth: true, requiresAdmin: true } },
 
-    { path: '*', redirect: '/' }
+    { path: '/request-email/:form', component: () => import('../views/auth/RequestEmail'), name: 'Request Email', meta: { title: 'Request Email', requiresGuest: true } },
+    { path: '/activate/:token', component: () => import('../views/auth/Activate'), name: 'Activate', meta: { title: 'Activate', requiresGuest: true } },
+    { path: '/reset-password/:token', component: () => import('../views/auth/ResetPassword'), name: 'Reset Password', meta: { title: 'Reset Password', requiresGuest: true } },
+
+    { path: '*', redirect: '/login' }
 ]
 
 const router = new VueRouter({

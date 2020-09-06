@@ -374,10 +374,6 @@ h6, .h6 {
     font-size: .875rem
 }
 
-.font-size-11 {
-    font-size: 11px
-}
-
 hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -3247,11 +3243,6 @@ h6 {
 
     img {
         page-break-inside: avoid
-    }
-
-    p {
-        orphans: 3;
-        widows: 3
     }
 
     body, .container {

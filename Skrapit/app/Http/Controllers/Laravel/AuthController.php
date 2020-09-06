@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Laravel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmailRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Mail\ResetPasswordMail;
+use App\Mail\WelcomeMail;
+use App\Model\Laravel\Token;
 use App\Model\Laravel\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -17,7 +23,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwtauth', ['except' => ['login', 'register']]);
+        $this->middleware('jwtauth', ['except' => ['login', 'register', 'activate', 'requestActivation', 'requestResetPassword']]);
     }
 
     /**
@@ -30,13 +36,20 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
         $ttl = env('JWT_TTL');
 
+        $user = User::where('email', request('email'))->first();
+
         if (request(['remember_me']) == true) {
             $ttl = env('JWT_REMEMBER_TTL');
         }
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Wrong credentials'], 401);
-        }
+        if (!$token = auth()->attempt($credentials))
+            return response()->json(['errors' => ['email' => ['Wrong credentials.']]], 402);
+
+        if (!$user->isActivated())
+            return response()->json(['errors' => ['email' => ['Your account is not activated.']]], 402);
+
+        if ($user->isBanned())
+            return response()->json(['errors' => ['email' => ['Your account is banned.']]], 402);
 
         return $this->respondWithToken($token, $ttl);
     }
@@ -44,17 +57,87 @@ class AuthController extends Controller
     /**
      * Register api
      *
-     * @param Request $request
+     * @param RegisterRequest $request
+     * @param Token $token
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request, Token $token)
     {
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        User::create($input);
+        $user = User::create([
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
 
-        return $this->login($input);
+        $token = $token->generateToken(1, $user->id);
+
+        Mail::to($user->email)->send(new WelcomeMail($user, $token));
+
+        return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
     }
+
+    public function requestActivation(EmailRequest $request, User $user, Token $token)
+    {
+        $type = 1;
+        $user = $user->getUserByEmail($request->input('email'));
+
+        if(!$user)
+            return response()->json(['errors' => ['email' => ['This user doesn\'t exist.']]], 402);
+
+        if($user->status != 0)
+            return response()->json(['errors' => ['email' => ['This accout is already activated.']]], 402);
+
+        $checkToken = Token::where(['user_id' => $user->id, 'type' => $type])->withTrashed()->latest()->first();
+
+        if(isset($checkToken) && date($checkToken->deleted_at) > now())
+            return response()->json(['errors' => ['email' => ['An email has already been sent. Please wait 30 minutes.']]], 402);
+
+        $token = $token->generateToken($type, $user->id);
+
+        Mail::to($user->email)->send(new WelcomeMail($user, $token));
+
+        return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
+    }
+
+    public function activate($token)
+    {
+        $token = Token::where('token', $token)->withTrashed()->first();
+
+        if(!$token)
+            return response()->json(['errors' => ['token' => ['This token doesn\'t exist.']]], 402);
+
+        $user = User::where('id', $token->user_id)->first();
+
+        if($user->status != 0)
+            return response()->json(['errors' => ['token' => ['This accout is already activated.']]], 402);
+
+        $user->status = 1;
+        $user->save();
+
+        $token->delete();
+
+        return response()->json(['success' => 'Your account is successfully activated.'], 200);
+    }
+
+    public function requestResetPassword(EmailRequest $request, User $user, Token $token)
+    {
+        $type = 2;
+        $user = $user->getUserByEmail($request->input('email'));
+
+        if(!$user)
+            return response()->json(['errors' => ['email' => ['This user doesn\'t exist.']]], 402);
+
+        $checkToken = Token::where(['user_id' => $user->id, 'type' => $type])->withTrashed()->latest()->first();
+
+        if(isset($checkToken) && date($checkToken->deleted_at) > now())
+            return response()->json(['errors' => ['email' => ['An email has already been sent. Please wait 30 minutes.']]], 402);
+
+        $token = $token->generateToken($type, $user->id);
+
+        Mail::to($user->email)->send(new ResetPasswordMail($token));
+
+        return response()->json(['success' => 'Please check your emails to reset your password !'], 200);
+    }
+
 
     /**
      * Get the authenticated User.
@@ -82,7 +165,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['success' => 'Successfully logged out']);
     }
 
     /**

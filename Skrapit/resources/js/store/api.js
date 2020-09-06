@@ -48,7 +48,7 @@ const actions = {
                     resolve(res)
                 })
                 .catch(err => {
-                    reject(err.response.data.error)
+                    reject(err.response.data.errors)
                 })
         })
     }

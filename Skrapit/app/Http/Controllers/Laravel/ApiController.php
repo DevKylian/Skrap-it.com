@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiRequest;
 use App\Model\Laravel\Api;
 use App\Model\Laravel\User;
+use Illuminate\Support\Str;
 
 class ApiController extends Controller
 {
@@ -31,6 +32,7 @@ class ApiController extends Controller
     public function createApi(ApiRequest $request)
     {
         $input = $request->all();
+        $input['title'] = strtoupper(Str::random(4));
         $input['user_id'] = $this->user->getId();
         $input['package_id'] = $this->user->getPackageId();
         $input['remaining_uses'] = $input['max_uses'];
@@ -46,7 +48,7 @@ class ApiController extends Controller
         $api = Api::find($id);
 
         if(!$api || ($userId != $api->user_id))
-            return response()->json(['error' => 'This API does not exist'], 402);
+            return response()->json(['errors' => ['api' => ['This API doesn\'t exist.']]], 402);
 
         Api::where('id', $id)->delete();
 
@@ -59,7 +61,7 @@ class ApiController extends Controller
         $api = Api::find($id);
 
         if(!$api || ($userId != $api->user_id))
-            return response()->json(['error' => 'This API does not exist'], 402);
+            return response()->json(['errors' => ['api' => ['This API doesn\'t exist.']]], 402);
 
         $api->update(['status' => !$api->status]);
 

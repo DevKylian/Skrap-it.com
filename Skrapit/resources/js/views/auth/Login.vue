@@ -17,17 +17,20 @@
                                                     <label class="form-control-label">Email</label>
                                                     <div class="input-group input-group-merge">
                                                         <input type="text" class="form-control" id="email"
-                                                               :class="{ 'is-invalid' : errors }"
+                                                               :class="{ 'is-invalid' : errors.email }"
                                                                placeholder="hello@skrap-it.com" v-model="form.email">
                                                     </div>
-                                                    <span class="sred" v-if="errors">{{ errors }}</span>
+                                                    <span class="sred" v-if="errors.email">{{ errors.email[0] }}</span>
                                                 </div>
                                                 <div class="form-group ">
-                                                    <label class="form-control-label">Password <a href="#">
-                                                        (Lost ?)</a></label>
+                                                    <label class="form-control-label">Password
+                                                        <router-link to="/request-email/reset-password">
+                                                            (Reset ?)
+                                                        </router-link>
+                                                    </label>
                                                     <div class="input-group input-group-merge">
                                                         <input type="password" class="form-control" id="password"
-                                                               :class="{ 'is-invalid' : errors }"
+                                                               :class="{ 'is-invalid' : errors.email }"
                                                                placeholder="****************" v-model="form.password">
                                                     </div>
                                                 </div>
@@ -44,6 +47,11 @@
                                                     <button class="sbtn sbtn-dark btn-block" type="submit">
                                                         <i class="fad fa-sign-in mr-3"></i>Login
                                                     </button>
+                                                </div>
+                                                <div class="text-center">
+                                                    <router-link to="/request-email/activation" class="h6 text-muted">
+                                                        Resend activation email
+                                                    </router-link>
                                                 </div>
                                             </form>
                                         </div>
@@ -65,8 +73,8 @@
                             <div class="row mt-3">
                                 <div class="col-12 text-center">
                                     <p class="text-muted">No account yet ?
-                                        <router-link to="/register" class="text-primary font-weight-bold ml-1">Sign up
-                                            now !
+                                        <router-link to="/register" class="text-primary font-weight-bold ml-1">
+                                            Sign up now !
                                         </router-link>
                                     </p>
                                 </div>
@@ -91,7 +99,7 @@ export default {
                 password: null,
                 remember_me: false
             },
-            errors: null,
+            errors: {},
         }
     },
     methods: {

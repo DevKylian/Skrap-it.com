@@ -255,6 +255,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -275,8 +276,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       isDeleteApiModalVisible: false,
       isReloading: false,
       form: {
-        max_uses: '',
-        title: ''
+        max_uses: ''
       },
       errors: {},
       selectedId: ''
@@ -315,7 +315,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this2.deleteApiModal(id);
       })["catch"](function (err) {
-        return _this2.$toast.error(err);
+        return _this2.$toast.error(err.api[0]);
       });
     },
     cleanModalApi: function cleanModalApi() {
@@ -350,7 +350,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post("/api/intel/toggle/".concat(id), Object(_helpers_header__WEBPACK_IMPORTED_MODULE_1__["authHeader"])()).then(function (res) {
         return _this4.$store.dispatch('setUsers');
       })["catch"](function (err) {
-        return console.log(err);
+        return _this4.$toast.error(err.response.data.errors.api[0]);
       });
     }
   }
@@ -1021,7 +1021,7 @@ var render = function() {
                               _c("i", { staticClass: "fad fa-sync-alt" }),
                               _vm._v(" "),
                               _c("span", { staticClass: "mobile-none ml-3" }, [
-                                _vm._v("Refresh data")
+                                _vm._v("Refresh")
                               ])
                             ]
                           )
@@ -1106,6 +1106,26 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
+                                _c(
+                                  "li",
+                                  {
+                                    staticClass: "dropdown-item",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.copyKey(api.key)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fad fa-lock-alt mr-3 sdark"
+                                    }),
+                                    _vm._v(
+                                      "Copy Key\n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 api.status !== 1
                                   ? _c(
                                       "li",
@@ -1155,6 +1175,27 @@ var render = function() {
                             )
                           ]
                         ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mobile-none" }, [
+                          _c(
+                            "button",
+                            { staticClass: "sbtn-sm sbtn-orange float-right" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "swhite",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.copyKey(api.key)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Copy key")]
+                              )
+                            ]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c(
                           "p",
@@ -1235,7 +1276,7 @@ var render = function() {
                                                   "span",
                                                   {
                                                     staticClass:
-                                                      "sgreen mobile-none"
+                                                      "sgreen mobile-none font-weight-bold"
                                                   },
                                                   [_vm._v("Online")]
                                                 ),
@@ -1256,7 +1297,7 @@ var render = function() {
                                                     "span",
                                                     {
                                                       staticClass:
-                                                        "sorange mobile-none"
+                                                        "sorange mobile-none font-weight-bold"
                                                     },
                                                     [_vm._v("Offline")]
                                                   ),
@@ -1319,51 +1360,6 @@ var render = function() {
                   slot: "body"
                 },
                 [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { staticClass: "form-control-label" }, [
-                      _vm._v("API Name")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "input-group input-group-merge" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.title,
-                              expression: "form.title"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.errors.title },
-                          attrs: {
-                            type: "text",
-                            id: "api_title",
-                            placeholder: "hello@skrap-it.com"
-                          },
-                          domProps: { value: _vm.form.title },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "title", $event.target.value)
-                            }
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm.errors.title
-                      ? _c("span", { staticClass: "sred" }, [
-                          _vm._v(" " + _vm._s(_vm.errors.title[0]))
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "apiUsage" } }, [
                       _vm._v("Max usage :\n                    "),

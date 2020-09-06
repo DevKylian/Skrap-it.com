@@ -10003,11 +10003,6 @@ a.text-blue:focus, a.text-blue:hover {
         page-break-inside: avoid
     }
 
-    h2, h3, p {
-        orphans: 3;
-        widows: 3
-    }
-
     h2, h3 {
         page-break-after: avoid
     }

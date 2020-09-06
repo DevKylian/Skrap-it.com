@@ -19,7 +19,7 @@ class Api extends Model
     {
         parent::__construct($attributes);
 
-        $this->key = Str::random(64);
+        $this->key = Str::random(128);
         $this->expiration_date = Carbon::today()->addDays(30);
     }
 

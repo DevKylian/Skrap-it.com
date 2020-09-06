@@ -33,7 +33,6 @@ class PackageController extends Controller
         $api = $user->apis();
         $api->update(['package_id' => $packageId]);
 
-
         return response()->json(['success' => 'Subscribed successfully for 1 month.'], 201);
     }
 }

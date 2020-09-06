@@ -26,7 +26,6 @@ class ApiRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'alpha_dash', 'between:4,15'],
             'max_uses' => ['required', 'gt:0', new ApiMaxUses(auth()->user())]
         ];
     }

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix('intel')->group(function () {
 
     /*
@@ -37,6 +36,11 @@ Route::group([
     'prefix' => 'auth'
 
 ], function () {
+
+    Route::post('request-activation','Laravel\AuthController@requestActivation');
+    Route::post('activate/{token}','Laravel\AuthController@activate');
+    Route::post('request-reset-password','Laravel\AuthController@requestResetPassword');
+    Route::post('reset-password/{token}','Laravel\AuthController@resetPassword');
 
     Route::post('login', 'Laravel\AuthController@login');
     Route::post('register', 'Laravel\AuthController@register');

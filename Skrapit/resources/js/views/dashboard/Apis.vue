@@ -20,7 +20,7 @@
                             <div class="align-self-center justify-content-end">
                                 <button v-if="!isReloading" class="sbtn sbtn-dark" @click="refreshData">
                                     <i class="fad fa-sync-alt"></i>
-                                    <span class="mobile-none ml-3">Refresh data</span>
+                                    <span class="mobile-none ml-3">Refresh</span>
                                 </button>
                                 <button v-if="isReloading" :disabled="true" class="sbtn sbtn-dark">
                                     <i class="fad fa-sync-alt fa-spin"></i>
@@ -51,6 +51,9 @@
                                         <li class="dropdown-item" @click="deleteApiModal(api.id)">
                                             <i class="fad fa-trash-alt mr-3 sred"></i>Delete
                                         </li>
+                                        <li class="dropdown-item" @click="copyKey(api.key)">
+                                            <i class="fad fa-lock-alt mr-3 sdark"></i>Copy Key
+                                        </li>
                                         <li class="dropdown-item" @click="toggleApi(api.id)" v-if="api.status !== 1">
                                             <i class="fad fa-toggle-on mr-3 sgreen"></i>Enable
                                         </li>
@@ -59,6 +62,13 @@
                                         </li>
                                     </ul>
                                 </div>
+
+                                <div class="mobile-none">
+                                    <button class="sbtn-sm sbtn-orange float-right">
+                                        <span class="swhite" @click="copyKey(api.key)">Copy key</span>
+                                    </button>
+                                </div>
+
                                 <p class="sdark text-uppercase font-weight-bold font-size-12">
                                     # <span class="sdark">
                                         {{ api.title }}
@@ -84,11 +94,11 @@
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item">
                                                     <div v-if="api.status === 1">
-                                                        <span class="sgreen mobile-none">Online</span>
+                                                        <span class="sgreen mobile-none font-weight-bold">Online</span>
                                                         <span class="dot pulse sbg-green"></span>
                                                     </div>
                                                     <div v-if="api.status !== 1" class="sorange">
-                                                        <span class="sorange mobile-none">Offline</span>
+                                                        <span class="sorange mobile-none font-weight-bold">Offline</span>
                                                         <span class="dot sbg-orange"></span>
                                                     </div>
                                                 </li>
@@ -105,15 +115,6 @@
         <Modal v-show="isGenerateApiModalVisible" @close="createApiModal" v-if="!getLoading">
             <span slot="title">Generate API</span>
             <form @submit.prevent="createApi" method="POST" slot="body">
-                <div class="form-group">
-                    <label class="form-control-label">API Name</label>
-                    <div class="input-group input-group-merge">
-                        <input type="text" class="form-control" id="api_title"
-                               :class="{ 'is-invalid' : errors.title }"
-                               placeholder="hello@skrap-it.com" v-model="form.title">
-                    </div>
-                    <span class="sred" v-if="errors.title"> {{ errors.title[0] }}</span>
-                </div>
                 <div class="form-group">
                     <label for="apiUsage">Max usage :
                         <span class="font-weight-bold sred">
@@ -179,7 +180,6 @@ export default {
             isReloading: false,
             form: {
                 max_uses: '',
-                title: ''
             },
             errors: {},
             selectedId: '',
@@ -213,7 +213,7 @@ export default {
                     this.$toast.success(res.data.success)
                     this.deleteApiModal(id)
                 })
-                .catch(err => this.$toast.error(err))
+                .catch(err => this.$toast.error(err.api[0]))
         },
         cleanModalApi() {
             this.form = {}
@@ -243,7 +243,7 @@ export default {
         toggleApi(id) {
             axios.post(`/api/intel/toggle/${id}`, authHeader())
                 .then(res => this.$store.dispatch('setUsers'))
-                .catch(err => console.log(err))
+                .catch(err => this.$toast.error(err.response.data.errors.api[0]))
         },
     },
 }

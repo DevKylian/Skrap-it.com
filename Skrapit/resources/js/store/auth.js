@@ -31,7 +31,7 @@ const actions = {
             })
             .catch(err => {
                 localStorage.removeItem('token')
-                reject(err.response.data.error)
+                reject(err.response.data.errors)
             })
         })
     },

@@ -24,8 +24,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:laravel.users',
-            'password' => 'required|confirmed'
+            'email' => 'required|string|email:rfc|unique:laravel.users|max:255',
+            'password' => 'required|string|min:8|max:255|confirmed',
+            'cgu' => 'accepted'
         ];
     }
 }

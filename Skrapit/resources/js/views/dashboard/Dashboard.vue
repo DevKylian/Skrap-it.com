@@ -14,99 +14,77 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 col-lg-6 col-xl-3 col-md-6" >
-                        <div class="card animate-up-2">
+                    <div class="col-12 col-lg-6 col-xl-3 col-md-6">
+                        <div class="card sbg-dark img-card animate-up-2">
                             <div class="card-body" v-if="getLoading">
                                 <StatsLoader></StatsLoader>
                             </div>
                             <div class="card-body" v-if="!getLoading">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <h3 class="font-weight-bold text-uppercase">{{ getUser.package.title }}</h3>
-                                        <div class="d-flex d-sm-block d-lg-flex align-items-end">
-                                            <p class="mb-0 mr-2 text-muted">Package</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="avatar avatar-lg">
-                                            <div class="avatar-title sdark sbg-soft-dark rounded">
-                                                <i class="fad fa-box-open"></i>
-                                            </div>
-                                        </div>
+                                <div class="d-flex">
+                                    <div class="swhite">
+                                        <span class="h2 mb-0 stats-title font-weight-bold">
+                                            {{ getUser.package.title }}
+                                        </span>
+                                        <p class="swhite mb-0">Package</p></div>
+                                    <div class="ml-auto">
+                                        <i class="fad fa-box-open swhite font-size-32 mr-2 mt-2"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-3 col-md-6" >
-                        <div class="card animate-up-2">
+                    <div class="col-12 col-lg-6 col-xl-3 col-md-6">
+                        <div class="card sbg-orange img-card animate-up-2">
                             <div class="card-body" v-if="getLoading">
                                 <StatsLoader></StatsLoader>
                             </div>
                             <div class="card-body" v-if="!getLoading">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <h3 class="font-weight-bold text-uppercase">{{ getUser.expiration_date | daysRemaining }}</h3>
-                                        <div class="d-flex d-sm-block d-lg-flex align-items-end">
-                                            <p class="mb-0 mr-2 text-muted">Expiration</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="avatar avatar-lg">
-                                            <div class="avatar-title sorange sbg-soft-orange rounded">
-                                                <i class="fad fa-alarm-clock"></i>
-                                            </div>
-                                        </div>
+                                <div class="d-flex">
+                                    <div class="swhite">
+                                        <span class="h2 mb-0 stats-title font-weight-bold">
+                                            {{ getUser.expiration_date | daysRemaining }}
+                                        </span>
+                                        <p class="swhite mb-0">Expiration</p></div>
+                                    <div class="ml-auto">
+                                        <i class="fad fa-alarm-clock swhite font-size-32 mr-2 mt-2"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-3 col-md-6" >
-                        <div class="card animate-up-2">
+                    <div class="col-12 col-lg-6 col-xl-3 col-md-6">
+                        <div class="card sbg-red img-card animate-up-2">
                             <div class="card-body" v-if="getLoading">
                                 <StatsLoader></StatsLoader>
                             </div>
                             <div class="card-body" v-if="!getLoading">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <h3 class="font-weight-bold text-uppercase">{{ percentageApiUsage() }} %</h3>
-                                        <div class="d-flex d-sm-block d-lg-flex align-items-end">
-                                            <p class="mb-0 mr-2 text-muted">API usage</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="avatar avatar-lg">
-                                            <div class="avatar-title sred sbg-soft-red rounded">
-                                                <i class="fad fa-project-diagram"></i>
-                                            </div>
-                                        </div>
+                                <div class="d-flex">
+                                    <div class="swhite">
+                                        <span class="h2 mb-0 stats-title font-weight-bold">
+                                            {{ percentageApiUsage() }} %
+                                        </span>
+                                        <p class="swhite mb-0">API usage</p></div>
+                                    <div class="ml-auto">
+                                        <i class="fad fa-project-diagram swhite font-size-32 mr-2 mt-2"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-3 col-md-6" >
-                        <div class="card animate-up-2">
+                    <div class="col-12 col-lg-6 col-xl-3 col-md-6">
+                        <div class="card sbg-dark img-card animate-up-2">
                             <div class="card-body" v-if="getLoading">
                                 <StatsLoader></StatsLoader>
                             </div>
                             <div class="card-body" v-if="!getLoading">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div>
-                                        <h3 class="font-weight-bold text-uppercase">
+                                <div class="d-flex">
+                                    <div class="swhite">
+                                        <span class="h2 mb-0 stats-title font-weight-bold">
                                             {{ getUser.apis.length }} / {{ getUser.package.max_api }}
-                                        </h3>
-                                        <div class="d-flex d-sm-block d-lg-flex align-items-end">
-                                            <p class="mb-0 mr-2 text-muted">API numbers</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="avatar avatar-lg">
-                                            <div class="avatar-title sdark sbg-soft-dark rounded">
-                                                <i class="fad fa-layer-group"></i>
-                                            </div>
-                                        </div>
+                                        </span>
+                                        <p class="swhite mb-0">API numbers</p></div>
+                                    <div class="ml-auto">
+                                        <i class="fad fa-layer-group swhite font-size-32 mr-2 mt-2"></i>
                                     </div>
                                 </div>
                             </div>

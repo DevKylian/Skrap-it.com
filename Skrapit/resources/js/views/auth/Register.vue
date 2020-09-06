@@ -45,11 +45,12 @@
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input"
                                                                id="checkbox-signup"
-                                                               checked="">
+                                                               checked="" v-model="form.cgu">
                                                         <label class="custom-control-label" for="checkbox-signup">I
                                                             agree to the
                                                             <a href="#">terms and conditions of use</a></label>
                                                     </div>
+                                                    <span class="sred" v-if="errors.cgu"> {{ errors.cgu[0] }}</span>
                                                 </div>
                                                 <div class="form-group mt-4 text-center">
                                                     <button class="sbtn sbtn-dark btn-block" type="submit"><i
@@ -96,7 +97,8 @@ export default {
             form: {
                 email: null,
                 password: null,
-                password_confirmation: null
+                password_confirmation: null,
+                cgu: null
             },
             errors: {}
         }
@@ -104,8 +106,11 @@ export default {
     methods: {
         register() {
             axios.post('/api/auth/register', this.form)
-                .then(res => this.$router.push({name:'Login'}))
-                .catch(error => this.errors = error.response.data.errors)
+                .then(res => {
+                    this.$router.push({name:'Login'})
+                    this.$toast.success(res.data.success)
+                })
+                .catch(err => this.errors = err.response.data.errors)
         },
     }
 }
