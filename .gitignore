@@ -4,4 +4,3 @@
 .docker/php-fpm/etc/php/7.4/fpm/conf.d 
 .composer
 .bash_history
-/scraping
