@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Laravel;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmailRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Mail\ResetPasswordMail;
 use App\Mail\WelcomeMail;
 use App\Model\Laravel\Token;
@@ -23,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwtauth', ['except' => ['login', 'register', 'activate', 'requestActivation', 'requestResetPassword']]);
+        $this->middleware('jwtauth', ['except' => ['login', 'register', 'activate', 'requestActivation', 'requestResetPassword', 'resetPassword']]);
     }
 
     /**
@@ -38,9 +39,7 @@ class AuthController extends Controller
 
         $user = User::where('email', request('email'))->first();
 
-        if (request(['remember_me']) == true) {
-            $ttl = env('JWT_REMEMBER_TTL');
-        }
+        if (request(['remember_me']) == true) $ttl = env('JWT_REMEMBER_TTL');
 
         if (!$token = auth()->attempt($credentials))
             return response()->json(['errors' => ['email' => ['Wrong credentials.']]], 402);
@@ -75,6 +74,12 @@ class AuthController extends Controller
         return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
     }
 
+    /**
+     * @param EmailRequest $request
+     * @param User $user
+     * @param Token $token
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function requestActivation(EmailRequest $request, User $user, Token $token)
     {
         $type = 1;
@@ -98,9 +103,13 @@ class AuthController extends Controller
         return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
     }
 
+    /**
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function activate($token)
     {
-        $token = Token::where('token', $token)->withTrashed()->first();
+        $token = Token::where('token', $token)->withTrashed()->latest()->first();
 
         if(!$token)
             return response()->json(['errors' => ['token' => ['This token doesn\'t exist.']]], 402);
@@ -110,6 +119,9 @@ class AuthController extends Controller
         if($user->status != 0)
             return response()->json(['errors' => ['token' => ['This accout is already activated.']]], 402);
 
+        if(date($token->deleted_at) < now())
+            return response()->json(['errors' => ['token' => ['This token is expired.']]], 402);
+
         $user->status = 1;
         $user->save();
 
@@ -118,6 +130,12 @@ class AuthController extends Controller
         return response()->json(['success' => 'Your account is successfully activated.'], 200);
     }
 
+    /**
+     * @param EmailRequest $request
+     * @param User $user
+     * @param Token $token
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function requestResetPassword(EmailRequest $request, User $user, Token $token)
     {
         $type = 2;
@@ -138,6 +156,32 @@ class AuthController extends Controller
         return response()->json(['success' => 'Please check your emails to reset your password !'], 200);
     }
 
+    /**
+     * @param ResetPasswordRequest $request
+     * @param $token
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function resetPassword(ResetPasswordRequest $request, $token)
+    {
+        $type = 2;
+
+        $token = Token::where(['token' => $token, 'type' => $type])->withTrashed()->latest()->first();
+
+        if(!$token)
+            return response()->json(['errors' => ['password' => ['This token doesn\'t exist.']]], 402);
+
+        $user = User::where(['id' => $token->user_id])->first();
+
+        if(date($token->deleted_at) < now())
+            return response()->json(['errors' => ['password' => ['This token is expired.']]], 402);
+
+        $token->delete();
+
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response()->json(['success' => 'The password has been correctly modified !']);
+    }
 
     /**
      * Get the authenticated User.

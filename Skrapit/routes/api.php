@@ -39,6 +39,7 @@ Route::group([
 
     Route::post('request-activation','Laravel\AuthController@requestActivation');
     Route::post('activate/{token}','Laravel\AuthController@activate');
+
     Route::post('request-reset-password','Laravel\AuthController@requestResetPassword');
     Route::post('reset-password/{token}','Laravel\AuthController@resetPassword');
 
