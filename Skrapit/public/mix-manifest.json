@@ -2,9 +2,6 @@
     "/js/app.js": "/js/app.js",
     "/js/assets/global.js": "/js/assets/global.js",
     "/css/landing/main.css": "/css/landing/main.css",
-    "/js/dashboard/scripts.js": "/js/dashboard/scripts.js",
     "/css/dashboard/main.css": "/css/dashboard/main.css",
-    "/css/custom.css": "/css/custom.css",
-    "/css/icons.css": "/css/icons.css",
-    "/css/app.css": "/css/app.css"
+    "/css/icons.css": "/css/icons.css"
 }

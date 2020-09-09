@@ -10,8 +10,6 @@
     <link rel="icon" href="/img/favicons/favicon.ico"/>
 
     <link rel="stylesheet" href="{{ asset('css/landing/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icons.css') }}">
 
 </head>

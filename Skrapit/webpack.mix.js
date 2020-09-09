@@ -16,32 +16,21 @@ mix.combine([
 
 // Landing CSS
 mix.combine([
+    'resources/sass/app.scss',
     'resources/sass/landing/skrapit.css',
+    'resources/sass/custom.css',
 ], 'public/css/landing/main.css');
-
-// Dashboard JS
-mix.combine([
-    'resources/js/dashboard/vendor.min.js',
-], 'public/js/dashboard/scripts.js');
 
 // Dashboard CSS
 mix.combine([
+    'resources/sass/app.scss',
     'resources/sass/dashboard/bootstrap.css',
     'resources/sass/dashboard/style.css',
     'resources/sass/dashboard/toast.css',
-], 'public/css/dashboard/main.css');
-
-// Custom CSS for all pages
-mix.combine([
     'resources/sass/custom.css',
-], 'public/css/custom.css');
+], 'public/css/dashboard/main.css');
 
 // Fontawesome Icons
 mix.combine([
     'resources/sass/all.css',
 ], 'public/css/icons.css');
-
-// Supplement CSS
-mix.combine([
-    'resources/sass/app.scss'
-], 'public/css/app.css');

@@ -9,9 +9,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="stylesheet" href="{{ mix('css/dashboard/main.css') }}">
-    <link rel="stylesheet" href="{{ mix('css/custom.css') }}">
     <link rel="stylesheet" href="{{ mix('css/icons.css') }}">
 
 </head>
