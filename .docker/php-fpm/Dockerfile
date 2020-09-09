@@ -40,6 +40,7 @@ RUN apt-get update \
     php-imagick \
     php-redis \
     php-xdebug \
+    php-mbstring \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 COPY etc /etc
