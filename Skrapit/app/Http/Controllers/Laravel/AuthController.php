@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EmailRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Jobs\ResetPasswordMailJob;
+use App\Jobs\WelcomeEmail;
+use App\Jobs\WelcomeMailJob;
 use App\Mail\ResetPasswordMail;
 use App\Mail\WelcomeMail;
 use App\Model\Laravel\Token;
@@ -69,7 +72,7 @@ class AuthController extends Controller
 
         $token = $token->generateToken(1, $user->id);
 
-        Mail::to($user->email)->send(new WelcomeMail($user, $token));
+        dispatch(new WelcomeMailJob($user, $token));
 
         return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
     }
@@ -98,7 +101,7 @@ class AuthController extends Controller
 
         $token = $token->generateToken($type, $user->id);
 
-        Mail::to($user->email)->send(new WelcomeMail($user, $token));
+        dispatch(new WelcomeMailJob($user, $token));
 
         return response()->json(['success' => 'Please check your emails to activate your account !'], 200);
     }
@@ -151,7 +154,7 @@ class AuthController extends Controller
 
         $token = $token->generateToken($type, $user->id);
 
-        Mail::to($user->email)->send(new ResetPasswordMail($token));
+        dispatch(new ResetPasswordMailJob($user, $token));
 
         return response()->json(['success' => 'Please check your emails to reset your password !'], 200);
     }

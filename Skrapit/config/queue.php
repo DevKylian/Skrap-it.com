@@ -35,6 +35,7 @@ return [
         ],
 
         'database' => [
+            'connection' => env('QUEUE_DATABASE', 'laravel'),
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
@@ -81,8 +82,9 @@ return [
     */
 
     'failed' => [
+        'connection' => env('QUEUE_FAILED_DATABASE', 'laravel'),
         'driver' => env('QUEUE_FAILED_DRIVER', 'database'),
-        'database' => env('DB_CONNECTION', 'mysql'),
+        'database' => env('DB_CONNECTION', 'laravel'),
         'table' => 'failed_jobs',
     ],
 
