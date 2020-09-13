@@ -214,7 +214,7 @@ export default {
             const pack = {
                 'package_id': packageId
             }
-            axios.post('/api/auth/subscribePackage', pack)
+            axios.post('/api/auth/subscribe-package', pack)
                 .then(resp => this.$toast.success(resp.data.success))
                 .catch(err => console.log(err))
         }

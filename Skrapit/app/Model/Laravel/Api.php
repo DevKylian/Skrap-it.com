@@ -45,9 +45,19 @@ class Api extends Model
      *
      * */
 
-    public function isActive()
+    public function isOnline()
     {
-        return $this->status;
+        return $this->status == 1;
+    }
+
+    public function isOffline()
+    {
+        return $this->status == 0;
+    }
+
+    public function isDisabled()
+    {
+        return $this->status == 2;
     }
 
     public function getApiByKey($key)

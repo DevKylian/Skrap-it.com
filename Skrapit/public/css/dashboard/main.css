@@ -10971,30 +10971,6 @@ a.text-blue:focus, a.text-blue:hover {
     margin-top: 0
 }
 
-.card-disabled {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border-radius: .25rem;
-    background: rgba(255, 255, 255, .8);
-    cursor: progress
-}
-
-.card-disabled .card-portlets-loader {
-    background-color: #3e4852;
-    animation: rotatebox 1.2s infinite ease-in-out;
-    height: 30px;
-    width: 30px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    border-radius: 3px;
-    margin-left: -12px;
-    margin-top: -12px
-}
-
 @keyframes rotatebox {
     0% {
         transform: perspective(120px) rotateX(0) rotateY(0)
@@ -17280,4 +17256,16 @@ input[type=checkbox] {
     .stats-title {
         font-size: 1.1rem;
     }
+}
+
+.card-disabled {
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: .25rem;
+    background: rgba(255, 255, 255, .82);
+    cursor: not-allowed;
 }

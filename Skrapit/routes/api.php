@@ -49,10 +49,12 @@ Route::group([
     Route::post('checkToken', 'Laravel\AuthController@checkToken');
 
     Route::group(['middleware' => 'auth'], function(){
+        Route::post('edit-profile', 'Laravel\UserController@editProfile');
+        Route::post('edit-password', 'Laravel\UserController@editPassword');
         Route::post('logout', 'Laravel\AuthController@logout');
         Route::post('me', 'Laravel\AuthController@me');
         Route::get('my', 'Laravel\ApiController@myApis');
-        Route::post('subscribePackage', 'Laravel\PackageController@subscribePackage');
+        Route::post('subscribe-package', 'Laravel\PackageController@subscribePackage');
     });
 
 });

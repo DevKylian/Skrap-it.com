@@ -2,7 +2,7 @@
     <transition name="modal">
         <div class="modal-mask" @click="$emit('close')">
             <div class="modal-wrapper modal">
-                <div class="modal-dialog modal-dialog-centered" @click.stop>
+                <div :class="size" class="modal-dialog modal-dialog-centered" @click.stop>
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="generateApiTitle">
@@ -30,6 +30,12 @@ export default {
             this.$emit('close');
         },
     },
+    props: {
+        size: {
+            type: String,
+            default: ''
+        }
+    }
 };
 </script>
 

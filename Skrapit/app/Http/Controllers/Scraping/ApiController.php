@@ -29,7 +29,7 @@ class ApiController extends Controller
         if($this->api->remaining_uses <= 0)
             return response()->json(['errors' => ['api' => ['Your API has reached 0 usage.']]], 402);
 
-        if(!$this->api->isActive())
+        if(!$this->api->isOnline())
             return response()->json(['errors' => ['api' => ['Your API is not enabled.']]], 402);
 
         $this->api->decrement('remaining_uses');

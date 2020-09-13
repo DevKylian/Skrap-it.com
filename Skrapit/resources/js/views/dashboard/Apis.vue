@@ -16,16 +16,17 @@
                                         ({{ getUser.apis.length }}/{{ getUser.package.max_api }})
                                     </span>
                                 </a>
+                                <button class="sbtn sbtn-orange" @click="needHelpModal">
+                                    <i class="fad fa-question-circle"></i>
+                                    <span class="mobile-none ml-3">How it works ?</span>
+                                </button>
                             </div>
                             <div class="align-self-center justify-content-end">
                                 <button v-if="!isReloading" class="sbtn sbtn-dark" @click="refreshData">
                                     <i class="fad fa-sync-alt"></i>
                                     <span class="mobile-none ml-3">Refresh</span>
                                 </button>
-                                <button v-if="isReloading" :disabled="true" class="sbtn sbtn-dark">
-                                    <i class="fad fa-sync-alt fa-spin"></i>
-                                    <span class="mobile-none ml-3">Please wait ...</span>
-                                </button>
+                                <ButtonLoader v-if="isReloading"></ButtonLoader>
                             </div>
                         </div>
                     </div>
@@ -37,6 +38,7 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-6" v-for="(api) in getUser.apis">
                         <div class="card">
+                            <div class="card-disabled" v-if="api.status === 2"></div>
                             <div class="card-body" v-if="getLoading">
                                 <ApisLoader></ApisLoader>
                             </div>
@@ -97,9 +99,14 @@
                                                         <span class="sgreen mobile-none font-weight-bold">Online</span>
                                                         <span class="dot pulse sbg-green"></span>
                                                     </div>
-                                                    <div v-if="api.status !== 1" class="sorange">
-                                                        <span class="sorange mobile-none font-weight-bold">Offline</span>
+                                                    <div v-if="api.status === 0" class="sorange">
+                                                        <span
+                                                            class="sorange mobile-none font-weight-bold">Offline</span>
                                                         <span class="dot sbg-orange"></span>
+                                                    </div>
+                                                    <div v-if="api.status === 2" class="sred">
+                                                        <span class="sred mobile-none font-weight-bold">Disabled</span>
+                                                        <span class="dot sbg-red"></span>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -152,6 +159,42 @@
                 </div>
             </div>
         </Modal>
+        <Modal size="modal-lg" v-show="isHelpApiModalVisible" @close="needHelpModal" v-if="!getLoading">
+            <span slot="title">Help on API System</span>
+            <div slot="body">
+                <h5>How it works ?</h5>
+                <hr>
+                <p>
+                    You can create as many APIs as your offer offers.<br>
+                    Once this number is reached you will not be able to create any more, you will have to change your
+                    offer.<br>
+
+                    You also have a maximum number of use according to your offer.<br>
+                    Once this number is reached you will not be able to create any more, you will have to change your
+                    offer.<br>
+
+                    You have the possibility to delete or deactivate/activate your API.<br>
+                    To access it, copy the key and enter it in url parameter ?key=YOUR_KEY
+                </p>
+                <h5 class="mt-4">The different states</h5>
+                <hr>
+                <p>
+                    <span class="sgreen mobile-none font-weight-bold">Online</span>
+                    <span class="dot pulse sbg-green mr-2"></span>
+                    <span>Your API is online, and for each access you consume 1 use.</span>
+                </p>
+                <p>
+                    <span class="sorange mobile-none font-weight-bold">Offline</span>
+                    <span class="dot sbg-orange mr-2"></span>
+                    <span>Your API is offline, you don't consume any usage, and you can reactivate it from the drop-down menu of your API.</span>
+                </p>
+                <p>
+                    <span class="sred mobile-none font-weight-bold">Disabled</span>
+                    <span class="dot sbg-red mr-2"></span>
+                    <span>Your API is deactivated, you can reactivate it by taking back the offer with which you created it.</span>
+                </p>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -159,12 +202,14 @@
 import {mapGetters} from 'vuex'
 import {authHeader} from "../../helpers/header";
 import ApisLoader from "../../components/Loader/ApisLoader";
+import ButtonLoader from "../../components/Loader/ButtonLoader";
 import Modal from "../../components/Modal";
 
 export default {
     components: {
         Modal,
         ApisLoader,
+        ButtonLoader,
     },
     computed: {
         ...mapGetters({
@@ -175,6 +220,7 @@ export default {
     },
     data() {
         return {
+            isHelpApiModalVisible: false,
             isGenerateApiModalVisible: false,
             isDeleteApiModalVisible: false,
             isReloading: false,
@@ -186,6 +232,9 @@ export default {
         };
     },
     methods: {
+        needHelpModal() {
+            this.isHelpApiModalVisible = !this.isHelpApiModalVisible;
+        },
         createApiModal() {
             if (this.getUser.package.max_api > this.getUser.apis.length && this.getRemainingUses > 0) {
                 this.isGenerateApiModalVisible = !this.isGenerateApiModalVisible;

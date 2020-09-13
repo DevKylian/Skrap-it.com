@@ -72,7 +72,9 @@ const actions = {
             });
     },
     checkToken() {
-        axios.post('/api/auth/checkToken', authHeader())
+        let uri = '/api/auth/checkToken'
+
+        axios.post(uri, authHeader())
             .then(res => {
                 !res.data.success ? store.commit('SET_TOKEN', res.data.token) : null
                 store.dispatch('setUsers');

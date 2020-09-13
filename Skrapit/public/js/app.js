@@ -21572,7 +21572,8 @@ var actions = {
     });
   },
   checkToken: function checkToken() {
-    axios.post('/api/auth/checkToken', Object(_helpers_header__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()).then(function (res) {
+    var uri = '/api/auth/checkToken';
+    axios.post(uri, Object(_helpers_header__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()).then(function (res) {
       !res.data.success ? _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('SET_TOKEN', res.data.token) : null;
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('setUsers');
     })["catch"](function (err) {

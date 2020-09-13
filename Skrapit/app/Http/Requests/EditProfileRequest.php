@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EmailRequest extends FormRequest
+class EditProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class EmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email:rfc|max:255'
+            'firstname' => 'nullable|string|max:50',
+            'lastname' => 'nullable|string|max:50',
+            'email' => 'required|string|email:rfc|unique:laravel.users,email,'.auth()->user()->id.'|max:255',
+            'phone_number' => 'nullable|numeric',
+            'address' => 'nullable|string|max:80',
         ];
     }
 }

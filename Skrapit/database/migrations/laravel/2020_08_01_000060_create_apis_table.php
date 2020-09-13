@@ -23,7 +23,7 @@ class CreateApisTable extends Migration
             $table->text('key');
             $table->integer('max_uses');
             $table->integer('remaining_uses');
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
             $table->dateTime('expiration_date');
 
             $table->softDeletes();

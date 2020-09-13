@@ -4,19 +4,12 @@ namespace App\Http\Controllers\Laravel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmailRequest;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\ResetPasswordRequest;
 use App\Jobs\ResetPasswordMailJob;
-use App\Jobs\WelcomeEmail;
 use App\Jobs\WelcomeMailJob;
-use App\Mail\ResetPasswordMail;
-use App\Mail\WelcomeMail;
 use App\Model\Laravel\Token;
 use App\Model\Laravel\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -164,7 +157,7 @@ class AuthController extends Controller
      * @param $token
      * @return \Illuminate\Http\JsonResponse
      */
-    public function resetPassword(ResetPasswordRequest $request, $token)
+    public function resetPassword(PasswordRequest $request, $token)
     {
         $type = 2;
 

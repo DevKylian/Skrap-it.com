@@ -44,11 +44,13 @@ class ApiController extends Controller
 
     public function deleteApi(User $user, $id)
     {
-        $userId = $user->getId();
         $api = Api::find($id);
 
-        if(!$api || ($userId != $api->user_id))
+        if(!$api || ($user->getId() != $api->user_id))
             return response()->json(['errors' => ['api' => ['This API doesn\'t exist.']]], 402);
+
+        if($api->isDisabled())
+            return response()->json(['errors' => ['api' => ['This API is disabled.']]], 402);
 
         Api::where('id', $id)->delete();
 
@@ -57,13 +59,15 @@ class ApiController extends Controller
 
     public function toggleApi(User $user, $id)
     {
-        $userId = $user->getId();
         $api = Api::find($id);
 
-        if(!$api || ($userId != $api->user_id))
+        if(!$api || ($user->getId() != $api->user_id))
             return response()->json(['errors' => ['api' => ['This API doesn\'t exist.']]], 402);
 
-        $api->update(['status' => !$api->status]);
+        if($api->isDisabled())
+            return response()->json(['errors' => ['api' => ['This API is disabled.']]], 402);
+
+        $api->isOnline() ? $api->update(['status' => 0]) : $api->update(['status' => 1]);
 
         return response()->json(['success' => 'API Successfully edited'], 200);
     }

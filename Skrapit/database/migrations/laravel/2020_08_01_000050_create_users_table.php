@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable()->unique();
             $table->string('address')->nullable();
-            $table->string('country')->nullable();
             $table->string('avatar')->default('user.jpg');
             $table->integer('status')->default(0);
             $table->dateTime('expiration_date')->default(Carbon::today()->addDays(9999));

@@ -4,8 +4,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="page-title-content">
-                            <p>Your Space</p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <div class="page-title-content">
+                                <p>Your Space</p>
+                            </div>
+                            <div class="align-self-center justify-content-end">
+                                <button v-if="!isReloading" class="sbtn sbtn-dark" @click="refreshData">
+                                    <i class="fad fa-sync-alt"></i>
+                                    <span class="mobile-none ml-3">Refresh</span>
+                                </button>
+                                <ButtonLoader v-if="isReloading"></ButtonLoader>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,13 +110,11 @@
                                              class="mr-4 align-self-center img-fluid"
                                              alt="cal">
                                     </div>
-                                    <div class="col-8 col-sm-8 col-md-6 col-lg-5 col-xl-6 offset-1" v-if="getLoading">
-                                        <div class="mt-4">
+                                    <div class="col-8 col-sm-8 col-md-6 col-lg-5 col-xl-6 offset-1">
+                                        <div class="mt-4" v-if="getLoading">
                                             <IllustrationLoader></IllustrationLoader>
                                         </div>
-                                    </div>
-                                    <div class="col-8 col-sm-8 col-md-6 col-lg-5 col-xl-6 offset-1" v-if="!getLoading">
-                                        <div class="mt-4">
+                                        <div class="mt-4" v-if="!getLoading">
                                             <h5 class="mt-0 mb-3 font-weight-bold">You currently have no api key</h5>
                                             <p>Depending on your offer, you can generate X api keys, and your number of
                                                 usage
@@ -130,18 +137,21 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import StatsLoader from '../../components/Loader/StatsLoader'
 import IllustrationLoader from "../../components/Loader/IllustrationLoader";
-import {mapGetters} from 'vuex';
+import ButtonLoader from "../../components/Loader/ButtonLoader";
 import moment from 'moment'
 
 export default {
     components: {
         StatsLoader,
         IllustrationLoader,
+        ButtonLoader,
     },
     data() {
         return {
+            isReloading: false,
             isGenerateApiModalVisible: false,
         };
     },
@@ -157,6 +167,17 @@ export default {
         }
     },
     methods: {
+        refreshData() {
+            this.$store.commit('SET_LOADING', true)
+            this.$store.dispatch('setUsers')
+            this.disableButton()
+        },
+        disableButton() {
+            this.isReloading = true;
+            setTimeout(() => {
+                this.isReloading = false;
+            }, 5000);
+        },
         percentage(partialValue, totalValue) {
             return Math.round((100 * partialValue) / totalValue);
         },
