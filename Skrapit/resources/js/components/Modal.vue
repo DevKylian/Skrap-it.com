@@ -5,7 +5,7 @@
                 <div :class="size" class="modal-dialog modal-dialog-centered" @click.stop>
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="generateApiTitle">
+                            <h4 class="modal-title">
                                 <slot name="title"></slot>
                             </h4>
                             <button type="button" class="close" @click="$emit('close')">

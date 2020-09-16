@@ -13,13 +13,15 @@
                                     <i class="fad fa-plus-circle"></i>
                                     <span class="mobile-none ml-3">Create API</span>
                                     <span v-if="!getLoading">
-                                        ({{ getUser.apis.length }}/{{ getUser.package.max_api }})
+                                        ({{ getCountApis }}/{{ getUser.package.max_api }})
                                     </span>
                                 </a>
-                                <button class="sbtn sbtn-orange" @click="needHelpModal">
-                                    <i class="fad fa-question-circle"></i>
-                                    <span class="mobile-none ml-3">How it works ?</span>
-                                </button>
+                                <span class="mobile-none">
+                                    <button class="sbtn sbtn-orange" @click="needHelpModal">
+                                        <i class="fad fa-question-circle"></i>
+                                        <span class="mobile-none ml-3">How it works ?</span>
+                                    </button>
+                                </span>
                             </div>
                             <div class="align-self-center justify-content-end">
                                 <button v-if="!isReloading" class="sbtn sbtn-dark" @click="refreshData">
@@ -123,10 +125,15 @@
             <span slot="title">Generate API</span>
             <form @submit.prevent="createApi" method="POST" slot="body">
                 <div class="form-group">
+                    <span
+                        tooltip="This number cannot be changed after"
+                        flow="up"><i class="fas fa-info-circle fa-lg sblue mr-2"></i>
+                    </span>
                     <label for="apiUsage">Max usage :
                         <span class="font-weight-bold sred">
                             {{ form.max_uses }} / {{ getRemainingUses }}
                         </span>
+
                     </label>
                     <input type="range" :min="0" :max="getRemainingUses" class="custom-range" id="apiUsage"
                            v-model="form.max_uses">
@@ -216,6 +223,7 @@ export default {
             getUser: 'getUsers',
             getLoading: 'getLoading',
             getRemainingUses: 'getRemainingUses',
+            getCountApis: 'getCountApis',
         }),
     },
     data() {
@@ -236,7 +244,7 @@ export default {
             this.isHelpApiModalVisible = !this.isHelpApiModalVisible;
         },
         createApiModal() {
-            if (this.getUser.package.max_api > this.getUser.apis.length && this.getRemainingUses > 0) {
+            if (this.getUser.package.max_api > this.getCountApis && this.getRemainingUses > 0) {
                 this.isGenerateApiModalVisible = !this.isGenerateApiModalVisible;
                 this.cleanModalApi();
             } else {

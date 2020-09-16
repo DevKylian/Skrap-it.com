@@ -119,9 +119,23 @@ class User extends Authenticatable implements JWTSubject
      * @param User $user
      * @return mixed
      */
+    public function sumApiUsesForPackage(User $user)
+    {
+        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->sum('max_uses');
+    }
+
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function countApis(User $user)
     {
         return Api::where('user_id', $user->getId())->count();
+    }
+
+    public function countApisForPackage(User $user)
+    {
+        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->count();
     }
 
     public function isBanned()

@@ -1467,7 +1467,7 @@ a.text-dark:hover, a.text-dark:focus {
     transition: all .25s ease-in;
     overflow: hidden;
     position: relative;
-    z-index: 1;
+    z-index: 10;
     margin-top: 100px
 }
 
@@ -3483,7 +3483,6 @@ body.authentication-bg {
     }
 }
 
-
 [tooltip] {
     position: relative;
 }
@@ -3503,7 +3502,6 @@ body.authentication-bg {
 [tooltip]::before {
     content: '';
     border: 5px solid transparent;
-    z-index: 1001;
 }
 
 [tooltip]::after {
@@ -3519,7 +3517,6 @@ body.authentication-bg {
     border-radius: .3ch;
     background: #242424;
     color: #ffffff;
-    z-index: 1000;
 }
 
 [tooltip]:hover::before,

@@ -24,20 +24,16 @@ class ApiMax implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
+     * @param  mixed  $attribute
      * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
         $maxApi = $this->user->package->getPackageInfo($this->user)->max_api;
-        $userApi = $this->user->countApis($this->user);
+        $userApi = $this->user->countApisForPackage($this->user);
 
-        if($maxApi > $userApi)
-            return true;
-
-        return false;
-
+        return $maxApi > $userApi;
     }
 
     /**

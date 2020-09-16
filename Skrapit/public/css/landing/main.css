@@ -42071,6 +42071,14 @@ ul li {
     background-color: #FF4757 !important;
 }
 
+.sblue {
+    color: #2196F3 !important;
+}
+
+.sbg-blue {
+    background-color: #2196F3 !important;
+}
+
 .sbg-soft-red {
     background-color: #FFCCD2 !important;
 }
@@ -43461,7 +43469,7 @@ input[type=checkbox] {
 }
 
 .card-disabled {
-    z-index: 100;
+    z-index: 2;
     position: absolute;
     left: 0;
     right: 0;

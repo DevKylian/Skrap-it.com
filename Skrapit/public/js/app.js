@@ -2193,7 +2193,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
@@ -2852,6 +2851,10 @@ var render = function() {
                             },
                             [
                               _c("div", { staticClass: "user" }, [
+                                _c("span", { staticClass: "name" }, [
+                                  _vm._v(_vm._s(_vm.getUser.email))
+                                ]),
+                                _vm._v(" "),
                                 _c("img", {
                                   staticClass:
                                     "mr-3 rounded-circle mr-0 mr-sm-3",
@@ -2862,10 +2865,6 @@ var render = function() {
                                     alt: ""
                                   }
                                 }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "name" }, [
-                                  _vm._v(_vm._s(_vm.getUser.email))
-                                ]),
                                 _vm._v(" "),
                                 _vm._m(1)
                               ])
@@ -21522,7 +21521,7 @@ var mutations = {
     state.token = "";
   },
   SET_IS_ADMIN: function SET_IS_ADMIN(state, rank) {
-    rank ? state.isAdmin = true : state.isAdmin = false;
+    state.isAdmin = !!rank;
   },
   SET_LOADING: function SET_LOADING(state, payload) {
     state.loading = payload;
@@ -21536,7 +21535,7 @@ var getters = {
     var r = 0;
 
     for (var i = 0; i < state.users.apis.length; i++) {
-      r += state.users.apis[i].max_uses;
+      if (state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses;
     }
 
     return state.users["package"].max_uses - r;
@@ -21545,7 +21544,16 @@ var getters = {
     var r = 0;
 
     for (var i = 0; i < state.users.apis.length; i++) {
-      r += state.users.apis[i].max_uses - state.users.apis[i].remaining_uses;
+      if (state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses - state.users.apis[i].remaining_uses;
+    }
+
+    return r;
+  },
+  getCountApis: function getCountApis(state) {
+    var r = 0;
+
+    for (var i = 0; i < state.users.apis.length; i++) {
+      if (state.users.apis[i].package_id === state.users.package_id) r++;
     }
 
     return r;

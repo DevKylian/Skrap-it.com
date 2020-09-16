@@ -27,10 +27,10 @@
                                         <div class="dropdown profile_log">
                                             <div class="profile_log" data-toggle="dropdown" aria-expanded="false">
                                                 <div class="user">
+                                                    <span class="name">{{ getUser.email }}</span>
                                                     <img class="mr-3 rounded-circle mr-0 mr-sm-3"
                                                          src="/img/dashboard/user.png"
                                                          width="40" height="40" alt="">
-                                                    <span class="name">{{ getUser.email }}</span>
                                                     <span class="arrow"><i class="la la-angle-down"></i></span>
                                                 </div>
                                             </div>
@@ -46,7 +46,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-
                                     </div>
                                 </div>
                             </nav>

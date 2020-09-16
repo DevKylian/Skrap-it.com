@@ -21,18 +21,15 @@ class ApiMaxUses implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
+     * @param  mixed  $attribute
      * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        $maxUses = $this->user->package->getPackageInfo($this->user)->max_uses - $this->user->sumApiUses($this->user);
+        $maxUses = $this->user->package->getPackageInfo($this->user)->max_uses - $this->user->sumApiUsesForPackage($this->user);
 
-        if($value > $maxUses)
-            return false;
-
-        return true;
+        return $value > $maxUses ? false : true;
     }
 
     /**

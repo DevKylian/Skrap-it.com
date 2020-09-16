@@ -26,11 +26,11 @@ class ApiController extends Controller
         if(strlen($name) < 3)
             return response()->json(['errors' => ['api' => ['The name must be at least 3 characters long.']]], 402);
 
-        if($this->api->remaining_uses <= 0)
-            return response()->json(['errors' => ['api' => ['Your API has reached 0 usage.']]], 402);
-
         if(!$this->api->isOnline())
             return response()->json(['errors' => ['api' => ['Your API is not enabled.']]], 402);
+
+        if($this->api->remaining_uses <= 0)
+            return response()->json(['errors' => ['api' => ['Your API has reached 0 usage.']]], 402);
 
         $this->api->decrement('remaining_uses');
 

@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="d-flex justify-content-between mt-3">
+                        <div class="d-flex justify-content-between">
                             <div class="page-title-content">
                                 <p>Your Space</p>
                             </div>
@@ -89,7 +89,7 @@
                                 <div class="d-flex">
                                     <div class="swhite">
                                         <span class="h2 mb-0 stats-title font-weight-bold">
-                                            {{ getUser.apis.length }} / {{ getUser.package.max_api }}
+                                            {{ getCountApis }} / {{ getUser.package.max_api }}
                                         </span>
                                         <p class="swhite mb-0">API numbers</p></div>
                                     <div class="ml-auto">
@@ -110,7 +110,7 @@
                                              class="mr-4 align-self-center img-fluid"
                                              alt="cal">
                                     </div>
-                                    <div class="col-8 col-sm-8 col-md-6 col-lg-5 col-xl-6 offset-1">
+                                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
                                         <div class="mt-4" v-if="getLoading">
                                             <IllustrationLoader></IllustrationLoader>
                                         </div>
@@ -121,7 +121,7 @@
                                                 will decrease according to the use of these keys.</p>
                                             <router-link to="/apis">
                                                 <span class="sbtn sbtn-orange animate-up-2 mt-3">
-                                                    <i class="fad fa-plus-circle mr-3"></i>Let's create !
+                                                    <i class="fad fa-plus-circle mr-3"></i>Create !
                                                 </span>
                                             </router-link>
                                         </div>
@@ -158,7 +158,8 @@ export default {
     computed: {
         ...mapGetters({
             getUser: 'getUsers',
-            getLoading: 'getLoading'
+            getLoading: 'getLoading',
+            getCountApis: 'getCountApis',
         }),
     },
     filters: {
