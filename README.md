@@ -21,7 +21,7 @@
 
 - [About the project](#about-the-project)
 - [What is Skrap-it ?](#what-is-skrap-it-)
-- [How to setup the project](#how-to-setup-the-projet)
+- [How to setup the project](#how-to-setup-the-project)
 - [Stack used](#stack-used)
 - [Scraping script](#scraping-script)
 - [Block diagram](#block-diagram)
