@@ -19,8 +19,9 @@
 
 # Table of Contents
 
-- [About The Project](#about-the-project)
-- [What is Skrap-it ?](#what-is-skrap-it)
+- [About the project](#about-the-project)
+- [What is Skrap-it ?](#what-is-skrap-it-)
+- [How to setup the project](#how-to-setup-the-projet)
 - [Stack used](#stack-used)
 - [Scraping script](#scraping-script)
 - [Block diagram](#block-diagram)
@@ -40,6 +41,27 @@ We have 3 main offers, one of which is completely free.
 Soon we will also add all AMD brand processors.
 
 Our API is kept up to date constantly, and automatically updates itself according to new additions.
+
+# How to setup the project
+
+> You must have Docker and Python3 with pip3 on your computer
+
+- Clone this project
+- Build docker with : sudo docker-compose up --build
+- Generate key : php artisan key:generate
+- Fix all environment variable : .env file
+- Enter in the php-fpm instance : sudo docker-compose exec php-fpm bash
+- cd Skrap-it
+- Install all dependencies : composer install & npm install
+- Generate laravel database : php artisan migrate:all laravel
+- Generate scraping database : php artisan migrate:all scraping
+- (outside php-fpm) : cd scraping
+- Install all python dependencies : sudo pip3 install -r requirements.txt
+- Run scraping script (~ 25min) : sudo python3 -B scrap.py
+- Go to this address from your web browser : http://172.28.1.1/
+
+> If you have permissions errors : sudo chmod -R 777 Skrapit
+
 
 # Stack used
 
@@ -93,6 +115,6 @@ Preview of the homepage, we serve to promote our api
 - [x] Front-end (only design)
 - [x] Docker config (docker-compose)
 - [x] Import Front-end
-- [ ] API routes
-- [ ] Back-end (laravel)
+- [x] API routes
+- [ ] Back-end (laravel) > in progress
 - [ ] Deployment on the production server
