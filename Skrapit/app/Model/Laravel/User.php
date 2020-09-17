@@ -39,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function apis()
     {
-        return $this->hasMany(Api::class);
+        return $this->hasMany(Api::class)->withTrashed();
     }
 
     public function package()
@@ -112,7 +112,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function sumApiUses(User $user)
     {
-        return Api::where('user_id', $user->getId())->sum('max_uses');
+        return Api::where('user_id', $user->getId())->withTrashed()->sum('max_uses');
     }
 
     /**
@@ -121,7 +121,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function sumApiUsesForPackage(User $user)
     {
-        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->sum('max_uses');
+        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->withTrashed()->sum('max_uses');
     }
 
     /**

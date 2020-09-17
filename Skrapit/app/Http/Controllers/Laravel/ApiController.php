@@ -52,6 +52,8 @@ class ApiController extends Controller
         if($api->isDisabled())
             return response()->json(['errors' => ['api' => ['This API is disabled.']]], 402);
 
+        $api->update(['status' => 3]);
+
         Api::where('id', $id)->delete();
 
         return response()->json(['success' => 'API Successfully deleted'], 200);

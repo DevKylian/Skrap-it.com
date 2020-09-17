@@ -21535,16 +21535,16 @@ var getters = {
     var r = 0;
 
     for (var i = 0; i < state.users.apis.length; i++) {
-      if (state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses;
+      if (state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses - (state.users.apis[i].max_uses - state.users.apis[i].remaining_uses);
     }
 
-    return state.users["package"].max_uses - r;
+    return r;
   },
   getApiUsage: function getApiUsage(state) {
     var r = 0;
 
     for (var i = 0; i < state.users.apis.length; i++) {
-      if (state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses - state.users.apis[i].remaining_uses;
+      if (state.users.apis[i].status !== 3 && state.users.apis[i].package_id === state.users.package_id) r += state.users.apis[i].max_uses - state.users.apis[i].remaining_uses;
     }
 
     return r;
@@ -21553,7 +21553,7 @@ var getters = {
     var r = 0;
 
     for (var i = 0; i < state.users.apis.length; i++) {
-      if (state.users.apis[i].package_id === state.users.package_id) r++;
+      if (state.users.apis[i].status !== 3 && state.users.apis[i].package_id === state.users.package_id) r++;
     }
 
     return r;

@@ -27,7 +27,7 @@ class ApiMaxUses implements Rule
      */
     public function passes($attribute, $value)
     {
-        $maxUses = $this->user->package->getPackageInfo($this->user)->max_uses - $this->user->sumApiUsesForPackage($this->user);
+        $maxUses = $this->user->package->getPackageInfo($this->user)->max_uses - ($this->user->package->getPackageInfo($this->user)->max_uses - $this->user->sumApiUsesForPackage($this->user));
 
         return $value > $maxUses ? false : true;
     }
