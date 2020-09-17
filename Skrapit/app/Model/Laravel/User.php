@@ -39,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function apis()
     {
-        return $this->hasMany(Api::class);
+        return $this->hasMany(Api::class)->withTrashed();
     }
 
     public function package()
@@ -78,7 +78,6 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-
     /*
      *
      * Below, all the functions to get the data
@@ -101,48 +100,80 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->package_id;
     }
 
+    /**
+     * @param $email
+     * @return mixed
+     */
     public function getUserByEmail($email)
     {
         return User::where('email', $email)->first();
     }
 
     /**
-     * @param User $user
      * @return mixed
      */
-    public function sumApiUses(User $user)
+    public function sumMaxUsesWithThrashed()
     {
-        return Api::where('user_id', $user->getId())->sum('max_uses');
+        return Api::where(['user_id' => $this->getId(), 'package_id' => $this->getPackageId()])->withTrashed()->sum('max_uses');
     }
 
     /**
-     * @param User $user
      * @return mixed
      */
-    public function sumApiUsesForPackage(User $user)
+    public function sumRemainingUsesWithTrashed()
     {
-        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->sum('max_uses');
+        return Api::where(['user_id' => $this->getId(), 'package_id' => $this->getPackageId()])->withTrashed()->sum('remaining_uses');
     }
 
     /**
-     * @param User $user
      * @return mixed
      */
-    public function countApis(User $user)
+    public function sumMaxUses()
     {
-        return Api::where('user_id', $user->getId())->count();
+        return Api::where(['user_id' => $this->getId(), 'package_id' => $this->getPackageId()])->sum('max_uses');
     }
 
-    public function countApisForPackage(User $user)
+    /**
+     * @return mixed
+     */
+    public function sumRemainingUses()
     {
-        return Api::where(['user_id' => $user->getId(), 'package_id' => $this->getPackageId()])->count();
+        return Api::where(['user_id' => $this->getId(), 'package_id' => $this->getPackageId()])->sum('remaining_uses');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getRemainingUses()
+    {
+        return $this->sumMaxUsesWithThrashed() - $this->sumRemainingUsesWithTrashed() + $this->sumMaxUses();
+    }
+
+    /**
+     * @param
+     * @return mixed
+     */
+    public function countApis()
+    {
+        return Api::where('user_id', $this->getId())->count();
+    }
+
+    public function countApisForPackage()
+    {
+        return Api::where(['user_id' => $this->getId(), 'package_id' => $this->getPackageId()])->count();
+    }
+
+    /**
+     * @return bool
+     */
     public function isBanned()
     {
         return $this->status == 2;
     }
 
+    /**
+     * @return bool
+     */
     public function isActivated()
     {
         return $this->status == 1;

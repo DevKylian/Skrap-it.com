@@ -39,6 +39,11 @@ class Token extends Model
      *
      * */
 
+    /**
+     * @param $type
+     * @param $id
+     * @return mixed
+     */
     public function generateToken($type, $id)
     {
         return Token::create([

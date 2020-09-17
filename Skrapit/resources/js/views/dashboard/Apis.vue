@@ -38,7 +38,7 @@
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xl-4 col-lg-6" v-for="(api) in getUser.apis">
+                    <div class="col-xl-4 col-lg-6" v-if="api.status !== 2 && api.status !== 3" v-for="(api) in getUser.apis">
                         <div class="card">
                             <div class="card-disabled" v-if="api.status === 2"></div>
                             <div class="card-body" v-if="getLoading">
@@ -102,13 +102,18 @@
                                                         <span class="dot pulse sbg-green"></span>
                                                     </div>
                                                     <div v-if="api.status === 0" class="sorange">
-                                                        <span
-                                                            class="sorange mobile-none font-weight-bold">Offline</span>
+                                                        <span class="sorange mobile-none font-weight-bold">
+                                                            Offline
+                                                        </span>
                                                         <span class="dot sbg-orange"></span>
                                                     </div>
                                                     <div v-if="api.status === 2" class="sred">
                                                         <span class="sred mobile-none font-weight-bold">Disabled</span>
                                                         <span class="dot sbg-red"></span>
+                                                    </div>
+                                                    <div v-if="api.status === 3" class="sdark">
+                                                        <span class="sdark mobile-none font-weight-bold">Deleted</span>
+                                                        <span class="dot sbg-dark"></span>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -127,7 +132,7 @@
                 <div class="form-group">
                     <span
                         tooltip="This number cannot be changed after"
-                        flow="up"><i class="fas fa-info-circle fa-lg sblue mr-2"></i>
+                        flow="right"><i class="fas fa-info-circle fa-lg sblue mr-2"></i>
                     </span>
                     <label for="apiUsage">Max usage :
                         <span class="font-weight-bold sred">
@@ -244,6 +249,7 @@ export default {
             this.isHelpApiModalVisible = !this.isHelpApiModalVisible;
         },
         createApiModal() {
+            console.log(this.getRemainingUses);
             if (this.getUser.package.max_api > this.getCountApis && this.getRemainingUses > 0) {
                 this.isGenerateApiModalVisible = !this.isGenerateApiModalVisible;
                 this.cleanModalApi();

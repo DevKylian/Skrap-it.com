@@ -34,11 +34,19 @@ class Package extends Model
      *
      * */
 
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function getPackageInfo(User $user)
     {
         return Package::where('id', $user->getPackageId())->first();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getPackageById($id)
     {
         return Package::where('id', $id)->first();
