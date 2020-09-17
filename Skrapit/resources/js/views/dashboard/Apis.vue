@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-xl-4 col-lg-6" v-if="api.status !== 2 && api.status !== 3" v-for="(api) in getUser.apis">
                         <div class="card">
-<!--                            <div class="card-disabled" v-if="api.status === 2"></div>-->
+                            <div class="card-disabled" v-if="api.status === 2"></div>
                             <div class="card-body" v-if="getLoading">
                                 <ApisLoader></ApisLoader>
                             </div>
@@ -102,8 +102,9 @@
                                                         <span class="dot pulse sbg-green"></span>
                                                     </div>
                                                     <div v-if="api.status === 0" class="sorange">
-                                                        <span
-                                                            class="sorange mobile-none font-weight-bold">Offline</span>
+                                                        <span class="sorange mobile-none font-weight-bold">
+                                                            Offline
+                                                        </span>
                                                         <span class="dot sbg-orange"></span>
                                                     </div>
                                                     <div v-if="api.status === 2" class="sred">

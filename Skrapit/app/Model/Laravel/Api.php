@@ -45,26 +45,43 @@ class Api extends Model
      *
      * */
 
+    /**
+     * @return bool
+     */
     public function isOnline()
     {
         return $this->status == 1;
     }
 
+    /**
+     * @return bool
+     */
     public function isOffline()
     {
         return $this->status == 0;
     }
 
+    /**
+     * @return bool
+     */
     public function isDisabled()
     {
         return $this->status == 2;
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     */
     public function getApiByKey($key)
     {
         return Api::where('key', $key)->first();
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function isFullAccess($key)
     {
         $api = $this->getApiByKey($key);
