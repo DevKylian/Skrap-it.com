@@ -468,7 +468,7 @@ a > code {
 .form-control {
     display: block;
     width: 100%;
-    height: 48px;
+    height: 42px;
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: 400;
@@ -479,6 +479,10 @@ a > code {
     border: 1px solid #ececec;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+}
+
+.form-control-search {
+    border-radius: .25rem 0 0 .25rem !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -665,10 +669,6 @@ input[type="button"].btn-block {
     color: #fff;
     border-color: #00c851;
     background-color: #00c851
-}
-
-.custom-control-input:focus ~ .custom-control-label:before {
-    box-shadow: 0 0 0 .2rem rgba(22, 82, 240, .25)
 }
 
 .custom-control-input:focus:not(:checked) ~ .custom-control-label:before {

@@ -16,12 +16,6 @@
                                         ({{ getCountApis }}/{{ getUser.package.max_api }})
                                     </span>
                                 </a>
-                                <span class="mobile-none">
-                                    <button class="sbtn sbtn-orange" @click="needHelpModal">
-                                        <i class="fad fa-question-circle"></i>
-                                        <span class="mobile-none ml-3">How it works ?</span>
-                                    </button>
-                                </span>
                             </div>
                             <div class="align-self-center justify-content-end">
                                 <button v-if="!isReloading" class="sbtn sbtn-dark" @click="refreshData">
@@ -169,42 +163,6 @@
                         Cancel
                     </div>
                 </div>
-            </div>
-        </Modal>
-        <Modal size="modal-lg" v-show="isHelpApiModalVisible" @close="needHelpModal" v-if="!getLoading">
-            <span slot="title">Help on API System</span>
-            <div slot="body">
-                <h5>How it works ?</h5>
-                <hr>
-                <p>
-                    You can create as many APIs as your offer offers.<br>
-                    Once this number is reached you will not be able to create any more, you will have to change your
-                    offer.<br>
-
-                    You also have a maximum number of use according to your offer.<br>
-                    Once this number is reached you will not be able to create any more, you will have to change your
-                    offer.<br>
-
-                    You have the possibility to delete or deactivate/activate your API.<br>
-                    To access it, copy the key and enter it in url parameter ?key=YOUR_KEY
-                </p>
-                <h5 class="mt-4">The different states</h5>
-                <hr>
-                <p>
-                    <span class="sgreen mobile-none font-weight-bold">Online</span>
-                    <span class="dot pulse sbg-green mr-2"></span>
-                    <span>Your API is online, and for each access you consume 1 use.</span>
-                </p>
-                <p>
-                    <span class="sorange mobile-none font-weight-bold">Offline</span>
-                    <span class="dot sbg-orange mr-2"></span>
-                    <span>Your API is offline, you don't consume any usage, and you can reactivate it from the drop-down menu of your API.</span>
-                </p>
-                <p>
-                    <span class="sred mobile-none font-weight-bold">Disabled</span>
-                    <span class="dot sbg-red mr-2"></span>
-                    <span>Your API is deactivated, you can reactivate it by taking back the offer with which you created it.</span>
-                </p>
             </div>
         </Modal>
     </div>

@@ -49,10 +49,10 @@
                 </ul>
             </div>
             <div class="d-none d-lg-block">
-                <a href="{{ url('login') }}" class="btn sbtn-border-white btn-docs animate-up-2">
+                <a href="{{ url('login') }}" class="sbtn sbtn-border-white btn-docs animate-up-2">
                     <i class="fad fa-sign-in-alt mr-3"></i>Login
                 </a>
-                <a href="{{ url('register') }}" class="btn sbtn-red btn-pricing-plan animate-up-2 ml-3">
+                <a href="{{ url('register') }}" class="sbtn sbtn-red btn-pricing-plan animate-up-2 ml-3">
                     <i class="fad fa-user-plus mr-3"></i>Register
                 </a>
             </div>
@@ -85,10 +85,10 @@
                     <h1 class="display-1 mb-4">We've got them all !</h1>
                     <p class="lead mb-3 mb-lg-5">Skrap-it takes care for you, to list all the processors of the
                         Intel range.</p>
-                    <a href="#packages" class="btn sbtn-red btn-pricing-plan animate-up-2 mb-sm-4 mb-4">
+                    <a href="#packages" class="sbtn sbtn-red btn-pricing-plan animate-up-2 mb-sm-4 mb-4">
                         <i class="fad fa-hand-point-right fa-swap-opacity mr-3"></i>Start for Free
                     </a>
-                    <a href="#how-it-works" class="btn sbtn-border-white btn-docs animate-up-2 mb-sm-4 mb-4 ml-3">
+                    <a href="#how-it-works" class="sbtn sbtn-border-white btn-docs animate-up-2 mb-sm-4 mb-4 ml-3">
                         <i class="fad fa-info-circle mr-3"></i>Learn more
                     </a>
                 </div>
@@ -97,7 +97,7 @@
                         <input class="form-control form-control-lg border-light" placeholder="i9-9980XE" type="text"
                                required>
                         <div class="input-group-prepend">
-                            <button type="submit" class="btn sbtn-red rounded-right"><i
+                            <button type="submit" class="sbtn sbtn-red rounded-right"><i
                                     class="fad fa-search fa-lg"></i>
                             </button>
                         </div>
@@ -198,7 +198,7 @@
                         Packages will be reviewed, and you will be notified !<br>
                         Subscription is currently cheaper, and will remain cheaper for future versions for those who
                         subscribe now.</p>
-                    <a href="#packages" class="btn sbtn-soft-dark animate-up-2 mt-3 mb-4 mb-lg-0">
+                    <a href="#packages" class="sbtn sbtn-soft-dark animate-up-2 mt-3 mb-4 mb-lg-0">
                         <i class="fad fa-check mr-3"></i>
                         See all packages
                     </a>
@@ -381,7 +381,7 @@
                             </ul>
                         </div>
                         <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="btn btn-block sbtn-dark animate-up-2">
+                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-dark animate-up-2">
                                 Start for Free
                                 <span class="icon icon-xs">
                                     <i class="fas fa-arrow-right ml-3"></i>
@@ -438,7 +438,7 @@
                             </ul>
                         </div>
                         <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="btn btn-block sbtn-orange animate-up-2">
+                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-orange animate-up-2">
                                 Start with Standard
                                 <span class="icon icon-xs ml-3">
                                     <i class="fas fa-arrow-right"></i>
@@ -493,7 +493,7 @@
                             </ul>
                         </div>
                         <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="btn btn-block sbtn-red animate-up-2">
+                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-red animate-up-2">
                                 Start with Pro
                                 <span class="icon icon-xs ml-3">
                                     <i class="fas fa-arrow-right"></i>
@@ -516,7 +516,7 @@
                 </div>
                 <div class="col-12 text-center">
                     <a href="#packages">
-                        <span class="btn sbtn-red animate-up-2">
+                        <span class="sbtn sbtn-red animate-up-2">
                             <i class="fad fa-hand-point-right mr-3"></i>Start for Free
                         </span>
                     </a>

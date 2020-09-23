@@ -24,17 +24,24 @@ class PackageController extends Controller
 
     public function subscribePackage(Request $request)
     {
-        $packageId = $request['package_id'];
-        $package = $this->package->getPackageById($packageId);
+        $data = [
+            'price' => $request['price'],
+            'uses' => $request['uses'],
+            'api' => $request['api'],
+            'days' => $request['days']
+        ];
 
-        $user = auth()->user();
+        if($request['free']) $package = $this->package->getPackageById(1);
+        else
+            if($request['price'] > 1500 || $request['price'] < 1)
+                return response()->json(['errors' => ['package' => ['There is a problem, please contact an administrator.']]], 402);
+            elseif($this->package->checkPrice($data))
+                $package = $this->package->createPackage($data);
+            else
+                return response()->json(['errors' => ['package' => ['There is a problem, please contact an administrator.']]], 402);
 
-        Api::where(['user_id' => $user->id, 'package_id' => $user->package_id])->update(['status' => 2]);
+        $this->api->toggleApis(auth()->user(), $package);
 
-        $user->update(['package_id' => $packageId, 'expiration_date' => Carbon::today()->addDays($package->days)]);
-
-        Api::where(['user_id' => $user->id, 'package_id' => $user->package_id])->update(['status' => 1]);
-
-        return response()->json(['success' => 'Subscribed successfully for 1 month.'], 201);
+        return response()->json(['success' => "Subscribed successfully for $package->days days."], 201);
     }
 }

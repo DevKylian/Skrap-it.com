@@ -32,7 +32,7 @@
                                 <div class="d-flex">
                                     <div class="swhite">
                                         <span class="h2 mb-0 stats-title font-weight-bold">
-                                            {{ getUser.package.title }}
+                                            {{ getPackageTitle() }}
                                         </span>
                                         <p class="swhite mb-0">Package</p></div>
                                     <div class="ml-auto">
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="mt-4" v-if="!getLoading">
                                             <h5 class="mt-0 mb-3 font-weight-bold">You currently have no api key</h5>
-                                            <p>Depending on your offer, you can generate X api keys, and your number of
+                                            <p class="mobile-none">Depending on your offer, you can generate X api keys, and your number of
                                                 usage
                                                 will decrease according to the use of these keys.</p>
                                             <router-link to="/apis">
@@ -124,6 +124,28 @@
                                                     <i class="fad fa-plus-circle mr-3"></i>Create !
                                                 </span>
                                             </router-link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
+                                        <div class="mt-4" v-if="getLoading">
+                                            <IllustrationLoader></IllustrationLoader>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <input type="text" class="form-control form-control-search" placeholder="i7-9900k" name="firstname">
+                                            <div class="align-self-center justify-content-end">
+                                                <button type="submit" class="sbtn search sbtn-dark">
+                                                    <i class="fad fa-search"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -184,6 +206,9 @@ export default {
         },
         percentageApiUsage() {
             return (this.getUser.apis.length <= 0) ? 0 : this.percentage(this.$store.getters.getApiUsage, this.getUser.package.max_uses)
+        },
+        getPackageTitle() {
+            return this.getUser.package.title === "Free" ? "Free" : "Custom"
         }
     },
 }

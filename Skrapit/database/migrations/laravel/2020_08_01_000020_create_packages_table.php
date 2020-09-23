@@ -21,9 +21,9 @@ class CreatePackagesTable extends Migration
             $table->integer('max_uses');
             $table->integer('max_api');
             $table->integer('days');
-            $table->boolean('graphics');
-            $table->boolean('quota_alert');
-            $table->boolean('full_access');
+            $table->boolean('graphics')->default(true);
+            $table->boolean('quota_alert')->default(true);
+            $table->boolean('full_access')->default(true);
         });
     }
 

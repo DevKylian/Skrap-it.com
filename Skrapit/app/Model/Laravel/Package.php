@@ -51,4 +51,33 @@ class Package extends Model
     {
         return Package::where('id', $id)->first();
     }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function createPackage($data): Package
+    {
+        return Package::firstOrCreate(
+            [
+                'title' => "${data['uses']}_${data['api']}_${data['days']}",
+                'price' => $data['price'],
+                'max_uses' => $data['uses'],
+                'max_api' => $data['api'],
+                'days' => $data['days']
+            ]
+        );
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function checkPrice($data): bool
+    {
+        $realPrice = $data['uses'] / 1000 * 0.5 + $data['api'];
+        $realPrice = $data['days'] === 30 ? $realPrice : $realPrice * 8;
+
+        return $realPrice == $data['price'];
+    }
 }

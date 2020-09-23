@@ -90,4 +90,18 @@ class Api extends Model
 
         return $package == 1;
     }
+
+    /**
+     * @param $user
+     * @param $package
+     * Disable all apis (status 2) for old package and enable all new apis (status 1)
+     */
+    public function toggleApis($user, $package)
+    {
+        Api::where(['user_id' => $user->id, 'package_id' => $user->package_id])->update(['status' => 2]);
+
+        $user->update(['package_id' => $package->id, 'expiration_date' => Carbon::today()->addDays($package->days)]);
+
+        Api::where(['user_id' => $user->id, 'package_id' => $user->package_id])->update(['status' => 1]);
+    }
 }

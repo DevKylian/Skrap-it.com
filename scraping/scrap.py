@@ -6,7 +6,7 @@ import datetime
 # path = '/home/ubuntu/Skrap-it.com/scraping/'
 
 # dev path
-path = '/home/kdev/Documents/Skrap-it.com/scraping/'
+path = '/home/kdevbox/Documents/Skrap-it.com/scraping/'
 
 os.chdir(path)
 
