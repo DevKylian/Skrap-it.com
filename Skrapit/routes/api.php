@@ -6,6 +6,12 @@ Route::prefix('intel')->group(function () {
 
     /*
      * ex : i9-10980XE, i9-7900X ...
+     * return only the name for all cpus
+     * */
+    Route::get('all-name/{name}', 'Scraping\ApiController@allName');
+
+    /*
+     * ex : i9-10980XE, i9-7900X ...
      * return all specs for one cpu
      * */
     Route::get('name/{name}', 'Scraping\ApiController@name');

@@ -18,6 +18,11 @@ class ApiController extends Controller
         $this->api = $api->getApiByKey($this->key);
     }
 
+    public function allName($name)
+    {
+        return Intel::where('name', 'LIKE', "%{$name}%")->get(['name', 'family']);
+    }
+
     public function name($name)
     {
         if(!$this->api || !$this->key)

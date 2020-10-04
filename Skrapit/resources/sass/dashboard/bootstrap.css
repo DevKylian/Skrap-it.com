@@ -5302,7 +5302,7 @@ a.badge-blue.focus, a.badge-blue:focus {
 .list-group-item {
     position: relative;
     display: block;
-    padding: .75rem 1.25rem;
+    padding: .25rem .5rem;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, .125)
 }

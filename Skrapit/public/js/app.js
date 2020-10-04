@@ -2188,11 +2188,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
@@ -2983,24 +2978,6 @@ var render = function() {
                     }
                   },
                   [_c("span", [_c("i", { staticClass: "fad fa-cubes fa-lg" })])]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c(
-                  "router-link",
-                  {
-                    attrs: { to: "/support", tooltip: "Support", flow: "right" }
-                  },
-                  [
-                    _c("span", [
-                      _c("i", { staticClass: "fad fa-question-circle" })
-                    ])
-                  ]
                 )
               ],
               1
@@ -21107,6 +21084,35 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 var options = {};
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toastification__WEBPACK_IMPORTED_MODULE_3__["default"], options);
+axios.interceptors.response.use(function (response) {
+  var token = localStorage.getItem('token');
+
+  if (!token && _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLogged) {
+    _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('logout');
+    _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
+  }
+
+  return response;
+}, function (error) {
+  var path = '/login';
+
+  switch (error.response.status) {
+    case 401:
+      path = '/login';
+      break;
+
+    case 403:
+      path = '/login';
+      break;
+
+    default:
+      return Promise.reject(error);
+  }
+
+  _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('logout');
+  _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push(path);
+  return Promise.reject(error);
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   components: {
@@ -21180,7 +21186,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 var routes = [{
   path: '/dashboard',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Dashboard */ "./resources/js/views/dashboard/Dashboard.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Dashboard */ "./resources/js/views/dashboard/Dashboard.vue"));
   },
   name: 'Dashboard',
   meta: {
@@ -21210,7 +21216,7 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
   },
   name: 'Profile',
   meta: {
@@ -21228,19 +21234,9 @@ var routes = [{
     requiresAuth: true
   }
 }, {
-  path: '/support',
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ../views/dashboard/Support */ "./resources/js/views/dashboard/Support.vue"));
-  },
-  name: 'Support',
-  meta: {
-    title: 'Support',
-    requiresAuth: true
-  }
-}, {
   path: '/apis',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Apis */ "./resources/js/views/dashboard/Apis.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Apis */ "./resources/js/views/dashboard/Apis.vue"));
   },
   name: 'Apis',
   meta: {
@@ -21331,18 +21327,39 @@ router.beforeEach(function (to, from, next) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helpers_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/header */ "./resources/js/helpers/header.js");
-
-var state = {};
-var mutations = {};
-var getters = {};
+var state = {
+  apiAllName: []
+};
+var mutations = {
+  SET_API_ALL_NAME: function SET_API_ALL_NAME(state, apis) {
+    state.apiAllName = apis;
+  }
+};
+var getters = {
+  getApiAllName: function getApiAllName(state) {
+    return state.apiAllName;
+  }
+};
 var actions = {
-  createApi: function createApi(_ref, data) {
+  allApiName: function allApiName(_ref, data) {
+    var commit = _ref.commit;
+    var uri = "/api/intel/all-name/".concat(data);
+    return new Promise(function (resolve, reject) {
+      axios.get(uri).then(function (res) {
+        commit('SET_API_ALL_NAME', res.data);
+        resolve(res);
+      })["catch"](function (err) {
+        reject(err);
+      });
+    });
+  },
+  createApi: function createApi(_ref2, data) {
     var _this = this;
 
-    var commit = _ref.commit;
+    var commit = _ref2.commit;
+    var uri = '/api/intel/create';
     return new Promise(function (resolve, reject) {
-      axios.post('/api/intel/create', data).then(function (res) {
+      axios.post(uri, data).then(function (res) {
         _this.dispatch('setUsers');
 
         resolve(res);
@@ -21351,11 +21368,10 @@ var actions = {
       });
     });
   },
-  editApi: function editApi(_ref2, data) {
+  editApi: function editApi(_ref3, data) {
     var _this2 = this;
 
-    var commit = _ref2.commit;
-    console.log(data);
+    var commit = _ref3.commit;
     var uri = "/api/intel/edit/".concat(data.id);
     return new Promise(function (resolve, reject) {
       axios.post(uri, data).then(function (res) {
@@ -21367,14 +21383,29 @@ var actions = {
       });
     });
   },
-  deleteApi: function deleteApi(_ref3, id) {
+  deleteApi: function deleteApi(_ref4, id) {
     var _this3 = this;
 
-    var commit = _ref3.commit;
+    var commit = _ref4.commit;
     var uri = "/api/intel/delete/".concat(id);
     return new Promise(function (resolve, reject) {
-      axios.post(uri, Object(_helpers_header__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()).then(function (res) {
+      axios.post(uri).then(function (res) {
         _this3.dispatch('setUsers');
+
+        resolve(res);
+      })["catch"](function (err) {
+        reject(err.response.data.errors);
+      });
+    });
+  },
+  toggleApi: function toggleApi(_ref5, id) {
+    var _this4 = this;
+
+    var commit = _ref5.commit;
+    var uri = "/api/intel/toggle/".concat(id);
+    return new Promise(function (resolve, reject) {
+      axios.post(uri).then(function (res) {
+        _this4.dispatch('setUsers');
 
         resolve(res);
       })["catch"](function (err) {
@@ -21402,6 +21433,8 @@ var actions = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../router/router */ "./resources/js/router/router.js");
+/* harmony import */ var _helpers_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/header */ "./resources/js/helpers/header.js");
+
 
 var state = {
   logged: !!localStorage.getItem('token')
@@ -21420,29 +21453,90 @@ var getters = {
   }
 };
 var actions = {
-  login: function login(_ref, user) {
+  login: function login(_ref, data) {
     var commit = _ref.commit;
+    var uri = '/api/auth/login';
     return new Promise(function (resolve, reject) {
-      axios.post('/api/auth/login', user).then(function (resp) {
-        var token = resp.data.access_token;
+      axios.post(uri, data).then(function (res) {
+        var token = res.data.access_token;
         commit('login');
         commit('SET_TOKEN', token);
         _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
           name: 'Dashboard'
         });
-        resolve(resp);
+        resolve(res);
       })["catch"](function (err) {
         localStorage.removeItem('token');
         reject(err.response.data.errors);
       });
     });
   },
-  logout: function logout(_ref2) {
+  register: function register(_ref2, data) {
     var commit = _ref2.commit;
-    commit('logout');
-    commit('CLEAR_TOKEN');
-    _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
-      name: 'Login'
+    var uri = '/api/auth/register';
+    return new Promise(function (resolve, reject) {
+      axios.post(uri, data).then(function (res) {
+        _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+          name: 'Login'
+        });
+        resolve(res);
+      })["catch"](function (err) {
+        return reject(err.response.data.errors);
+      });
+    });
+  },
+  logout: function logout(_ref3) {
+    var commit = _ref3.commit;
+    var uri = '/api/auth/logout';
+    return new Promise(function (resolve, reject) {
+      axios.post(uri).then(function (res) {
+        commit('logout');
+        commit('CLEAR_TOKEN');
+        _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+          name: 'Login'
+        });
+        resolve(res);
+      })["catch"](function (err) {
+        localStorage.removeItem('token');
+        _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
+          name: 'Login'
+        });
+        reject(err.response.data.errors);
+      });
+    });
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  mutations: mutations,
+  getters: getters,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/package.js":
+/*!***************************************!*\
+  !*** ./resources/js/store/package.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {};
+var mutations = {};
+var getters = {};
+var actions = {
+  subscribePackage: function subscribePackage(_ref, data) {
+    var commit = _ref.commit;
+    var uri = '/api/auth/subscribe-package';
+    return new Promise(function (resolve, reject) {
+      axios.post(uri, data).then(function (res) {
+        return resolve(res);
+      })["catch"](function (err) {
+        return reject(err.response.data.errors);
+      });
     });
   }
 };
@@ -21470,6 +21564,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user */ "./resources/js/store/user.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./api */ "./resources/js/store/api.js");
+/* harmony import */ var _package__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./package */ "./resources/js/store/package.js");
+
 
 
 
@@ -21481,7 +21577,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
     user: _user__WEBPACK_IMPORTED_MODULE_3__["default"],
-    api: _api__WEBPACK_IMPORTED_MODULE_4__["default"]
+    api: _api__WEBPACK_IMPORTED_MODULE_4__["default"],
+    packages: _package__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 }));
 
@@ -21574,7 +21671,7 @@ var getters = {
 var actions = {
   setUsers: function setUsers(context) {
     var uri = '/api/auth/me';
-    axios.post(uri, Object(_helpers_header__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()).then(function (res) {
+    axios.post(uri).then(function (res) {
       context.commit('SET_USER', res.data);
       context.commit('SET_IS_ADMIN', res.data.isAdmin);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('SET_LOADING', false);
@@ -21584,7 +21681,7 @@ var actions = {
   },
   checkToken: function checkToken() {
     var uri = '/api/auth/checkToken';
-    axios.post(uri, Object(_helpers_header__WEBPACK_IMPORTED_MODULE_0__["authHeader"])()).then(function (res) {
+    axios.post(uri).then(function (res) {
       !res.data.success ? _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('SET_TOKEN', res.data.token) : null;
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('setUsers');
     })["catch"](function (err) {

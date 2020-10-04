@@ -1,4 +1,5 @@
 import router from '../router/router'
+import {authHeader} from "../helpers/header";
 
 const state = {
     logged: !!localStorage.getItem('token'),
@@ -19,15 +20,17 @@ const getters = {
 }
 
 const actions = {
-    login ({ commit }, user) {
+    login ({ commit }, data) {
+        let uri = '/api/auth/login'
+
         return new Promise((resolve, reject) => {
-        axios.post('/api/auth/login', user)
-            .then(resp => {
-                const token = resp.data.access_token
+        axios.post(uri, data)
+            .then(res => {
+                const token = res.data.access_token
                 commit('login')
                 commit('SET_TOKEN', token)
                 router.push({name: 'Dashboard'})
-                resolve(resp)
+                resolve(res)
             })
             .catch(err => {
                 localStorage.removeItem('token')
@@ -36,11 +39,36 @@ const actions = {
         })
     },
 
-    logout ({ commit }) {
-        commit('logout')
-        commit('CLEAR_TOKEN')
+    register ({ commit }, data) {
+        let uri = '/api/auth/register'
 
-        router.push({name: 'Login'})
+        return new Promise((resolve, reject) => {
+        axios.post(uri, data)
+            .then(res => {
+                router.push({name: 'Login'})
+                resolve(res)
+            })
+            .catch(err => reject(err.response.data.errors))
+        })
+    },
+
+    logout ({ commit }) {
+        let uri = '/api/auth/logout'
+
+        return new Promise((resolve, reject) => {
+            axios.post(uri)
+                .then(res => {
+                    commit('logout')
+                    commit('CLEAR_TOKEN')
+                    router.push({name: 'Login'})
+                    resolve(res)
+                })
+                .catch(err => {
+                    localStorage.removeItem('token')
+                    router.push({name: 'Login'})
+                    reject(err.response.data.errors)
+                })
+        })
     }
 }
 

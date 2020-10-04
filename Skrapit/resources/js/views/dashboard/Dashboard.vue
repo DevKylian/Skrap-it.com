@@ -116,7 +116,8 @@
                                         </div>
                                         <div class="mt-4" v-if="!getLoading">
                                             <h5 class="mt-0 mb-3 font-weight-bold">You currently have no api key</h5>
-                                            <p class="mobile-none">Depending on your offer, you can generate X api keys, and your number of
+                                            <p class="mobile-none">Depending on your offer, you can generate X api keys,
+                                                and your number of
                                                 usage
                                                 will decrease according to the use of these keys.</p>
                                             <router-link to="/apis">
@@ -134,17 +135,42 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row align-items-center">
-                                    <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-6">
-                                        <div class="mt-4" v-if="getLoading">
-                                            <IllustrationLoader></IllustrationLoader>
+                                    <div class="col-12">
+                                        <h5 class="mt-0 mb-3 font-weight-bold"><i class="fad fa-search mr-2"></i>Search a CPU</h5>
+                                        <p>Find all the processors of the Intel range, by their names.</p>
+                                        <div class="d-sm-flex justify-content-between">
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           id="searchInput"
+                                                           placeholder="i9-9900k"
+                                                           v-model.lazy="searchbarCpu" v-debounce="delay"
+                                                           :class="{ 'is-invalid' : searchbarCpuError }">
+                                                </div>
+                                                <span class="sred" v-if="searchbarCpuError">{{ searchbarCpuError }}</span>
+                                            </div>
                                         </div>
-
-                                        <div class="d-flex justify-content-between">
-                                            <input type="text" class="form-control form-control-search" placeholder="i7-9900k" name="firstname">
-                                            <div class="align-self-center justify-content-end">
-                                                <button type="submit" class="sbtn search sbtn-dark">
-                                                    <i class="fad fa-search"></i>
-                                                </button>
+                                        <div>
+                                            <div class="text-right">
+                                                <h3 class="h6 mb-1" v-if="cpus">
+                                                    {{ cpus.length }} result(s)
+                                                </h3>
+                                            </div>
+                                            <div class="col-12 scroll mt-4">
+                                                <ul class="list-group list-group-flush">
+                                                    <li v-for="(cpu) in cpus" v-if="!getLoading"
+                                                        class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                                                        <div>
+                                                            <h5 class="font-weight-bold mb-1">
+                                                                {{ cpu.name }}
+                                                            </h5>
+                                                            <p class="pr-4">
+                                                                {{ cpu.family }}
+                                                            </p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -162,19 +188,26 @@
 import {mapGetters} from 'vuex';
 import StatsLoader from '../../components/Loader/StatsLoader'
 import IllustrationLoader from "../../components/Loader/IllustrationLoader";
+import SearchCpuLoader from "../../components/Loader/SearchCpuLoader";
 import ButtonLoader from "../../components/Loader/ButtonLoader";
 import moment from 'moment'
+import debounce from 'v-debounce';
 
 export default {
     components: {
         StatsLoader,
         IllustrationLoader,
+        SearchCpuLoader,
         ButtonLoader,
     },
     data() {
         return {
+            delay: 500,
+            searchbarCpu: '',
+            searchbarCpuError: '',
             isReloading: false,
             isGenerateApiModalVisible: false,
+            cpus: [],
         };
     },
     computed: {
@@ -182,12 +215,22 @@ export default {
             getUser: 'getUsers',
             getLoading: 'getLoading',
             getCountApis: 'getCountApis',
+            getApiAllName: 'getApiAllName',
         }),
+    },
+    directives: {
+        debounce
     },
     filters: {
         daysRemaining: function (start) {
             return moment(start).diff(moment(new Date()), 'days') + " days";
         }
+    },
+    watch: {
+        'searchbarCpu'(val) {
+            if(val.length < 3) this.searchbarCpuError = 'Please type 3 characters'
+            else { this.searchbarCpuError = ''; this.searchCpu() }
+        },
     },
     methods: {
         refreshData() {
@@ -199,7 +242,7 @@ export default {
             this.isReloading = true;
             setTimeout(() => {
                 this.isReloading = false;
-            }, 5000);
+            }, 2000);
         },
         percentage(partialValue, totalValue) {
             return Math.round((100 * partialValue) / totalValue);
@@ -209,7 +252,12 @@ export default {
         },
         getPackageTitle() {
             return this.getUser.package.title === "Free" ? "Free" : "Custom"
-        }
+        },
+        searchCpu() {
+            this.$store.dispatch('allApiName', this.searchbarCpu)
+            .then(res => this.cpus = res.data)
+            .catch(err => console.log(err))
+        },
     },
 }
 </script>

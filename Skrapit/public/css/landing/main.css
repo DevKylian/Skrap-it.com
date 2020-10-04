@@ -43456,7 +43456,7 @@ input[type=checkbox] {
 .img-card:before {
     content: '';
     position: absolute;
-    background: url(https://www.spruko.com/demo/yoha/Yoha/assets/images/svgs/circle.svg) no-repeat right;
+    background: url(/img/circle.svg) no-repeat right;
     width: 100%;
     height: 100%;
     opacity: 0.5;

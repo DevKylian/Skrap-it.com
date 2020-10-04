@@ -16,6 +16,29 @@ const options = {
 
 Vue.use(Toast, options);
 
+axios.interceptors.response.use(response => {
+    const token = localStorage.getItem('token');
+    if(!token && store.getters.isLogged) {
+        store.commit('logout')
+        router.push('/login');
+    }
+
+    return response;
+}, error => {
+    let path = '/login';
+
+    switch (error.response.status) {
+        case 401: path = '/login'; break;
+        case 403: path = '/login'; break;
+        default : return Promise.reject(error);
+    }
+
+    store.commit('logout')
+    router.push(path);
+
+    return Promise.reject(error);
+});
+
 const app = new Vue({
     el: '#app',
     components: { MainApp },

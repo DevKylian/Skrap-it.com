@@ -105,13 +105,10 @@ export default {
     },
     methods: {
         register() {
-            axios.post('/api/auth/register', this.form)
-                .then(res => {
-                    this.$router.push({name:'Login'})
-                    this.$toast.success(res.data.success)
-                })
-                .catch(err => this.errors = err.response.data.errors)
-        },
+            this.$store.dispatch('register', this.form)
+                .then((res) => this.$toast.success(res.data.success))
+                .catch(err => this.errors = err)
+        }
     }
 }
 </script>

@@ -66,7 +66,7 @@
                                 </div>
                                 <h4 class="mb-3 text-black">Custom Offer</h4>
                                 <p class="font-weight-normal mb-0">
-                                    Adjust the sliders to find the offer that suits you best!
+                                    Adjust the sliders to find the offer that suits you best !
                                 </p>
                             </div>
                             <div class="card-body pt-3">
@@ -142,12 +142,13 @@ export default {
         },
         subscribePackage(free) {
             let data = free ? this.freePackage : this.package
-            axios.post('/api/auth/subscribe-package', data)
-                .then(resp => {
-                    this.$toast.success(resp.data.success)
+
+            this.$store.dispatch('subscribePackage', data)
+                .then((res) => {
+                    this.$toast.success(res.data.success)
                     this.errors = {}
                 })
-                .catch(err => this.errors = err.response.data.errors)
+                .catch(err => {if(err) this.errors = err})
         }
     }
 }

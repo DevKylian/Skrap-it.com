@@ -72,7 +72,7 @@ const actions = {
     setUsers(context) {
         let uri = '/api/auth/me'
 
-        axios.post(uri, authHeader())
+        axios.post(uri)
             .then(res => {
                 context.commit('SET_USER', res.data)
                 context.commit('SET_IS_ADMIN', res.data.isAdmin)
@@ -85,7 +85,7 @@ const actions = {
     checkToken() {
         let uri = '/api/auth/checkToken'
 
-        axios.post(uri, authHeader())
+        axios.post(uri)
             .then(res => {
                 !res.data.success ? store.commit('SET_TOKEN', res.data.token) : null
                 store.dispatch('setUsers');

@@ -77,11 +77,6 @@
                                 <span><i class="fad fa-cubes fa-lg"></i></span>
                             </router-link>
                         </li>
-                        <li>
-                            <router-link to="/support" tooltip="Support" flow="right">
-                                <span><i class="fad fa-question-circle"></i></span>
-                            </router-link>
-                        </li>
                         <li v-if="isAdmin">
                             <router-link to="/admin" tooltip="Administration" flow="right">
                                 <span><i class="fad fa-planet-ringed fa-lg sred"></i></span>

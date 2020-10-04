@@ -207,7 +207,6 @@ export default {
             this.isHelpApiModalVisible = !this.isHelpApiModalVisible;
         },
         createApiModal() {
-            console.log(this.getRemainingUses);
             if (this.getUser.package.max_api > this.getCountApis && this.getRemainingUses > 0) {
                 this.isGenerateApiModalVisible = !this.isGenerateApiModalVisible;
                 this.cleanModalApi();
@@ -226,7 +225,7 @@ export default {
                     this.$toast.success(res.data.success)
                     this.createApiModal()
                 })
-                .catch(err => this.errors = err)
+                .catch(err => {if(err) this.errors = err})
         },
         deleteApi(id) {
             this.$store.dispatch('deleteApi', id)
@@ -234,7 +233,14 @@ export default {
                     this.$toast.success(res.data.success)
                     this.deleteApiModal(id)
                 })
-                .catch(err => this.$toast.error(err.api[0]))
+                .catch(err => { if(err) this.$toast.error(err.api[0]) })
+        },
+        toggleApi(id) {
+            this.$store.dispatch('toggleApi', id)
+                .then((res) => {
+                    this.$toast.success(res.data.success)
+                })
+                .catch(err => { if(err) this.$toast.error(err.api[0]) })
         },
         cleanModalApi() {
             this.form = {}
@@ -249,7 +255,7 @@ export default {
             this.isReloading = true;
             setTimeout(() => {
                 this.isReloading = false;
-            }, 5000);
+            }, 2000);
         },
         copyKey(key) {
             const ke = document.createElement('textarea');
@@ -260,11 +266,6 @@ export default {
             document.body.removeChild(ke);
 
             this.$toast.success('Key copied to the clipboard')
-        },
-        toggleApi(id) {
-            axios.post(`/api/intel/toggle/${id}`, authHeader())
-                .then(res => this.$store.dispatch('setUsers'))
-                .catch(err => this.$toast.error(err.response.data.errors.api[0]))
         },
     },
 }
