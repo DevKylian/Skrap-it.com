@@ -12344,9 +12344,6 @@ a.bg-success:hover, a.bg-success:focus, button.bg-success:hover, button.bg-succe
 a.bg-danger:hover, a.bg-danger:focus, button.bg-danger:hover, button.bg-danger:focus {
     background-color: #ff4563 !important
 }
-.border-top {
-    border-top: 1px solid #f1f4f8 !important
-}
 .rounded-circle {
     border-radius: 50% !important
 }
@@ -12593,9 +12590,18 @@ a.text-dark:hover, a.text-dark:focus {
     top: 0
 }
 .header.dashboard {
-    background-color: #f2f6fe;
+    background: rgba(242, 246, 254, .42);
+    -webkit-backdrop-filter: saturate(1) blur(20px) !important;
+    -o-backdrop-filter: saturate(1) blur(20px) !important;
+    -ms-backdrop-filter: saturate(1) blur(20px) !important;
+    backdrop-filter: saturate(1) blur(20px) !important;
     border-bottom: 1px solid #f1f4f8;
     margin-left: 75px
+}
+@-moz-document url-prefix() {
+    .header.dashboard {
+        background: #F2F6FE
+    }
 }
 .header.dashboard .navbar {
     padding: 0

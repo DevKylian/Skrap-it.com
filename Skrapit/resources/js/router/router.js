@@ -9,6 +9,7 @@ const routes = [
     { path: '/login', component: () => import('../views/auth/Login'), name: 'Login', meta: { title: 'Login', requiresGuest: true } },
     { path: '/register', component: () => import('../views/auth/Register'), name: 'Register', meta: { title: 'Register', requiresGuest: true } },
     { path: '/profile', component: () => import('../views/dashboard/Profile'), name: 'Profile', meta: { title: 'Profile', requiresAuth: true } },
+    { path: '/settings', component: () => import('../views/dashboard/Settings'), name: 'Settings', meta: { title: 'Settings', requiresAuth: true } },
     { path: '/packages', component: () => import('../views/dashboard/Packages'), name: 'Packages', meta: { title: 'Packages', requiresAuth: true } },
     { path: '/apis', component: () => import('../views/dashboard/Apis'), name: 'Apis', meta: { title: 'Apis', requiresAuth: true } },
     { path: '/admin', component: () => import('../views/dashboard/Admin'), name: 'Admin', meta: { title: 'Admin', requiresAuth: true, requiresAdmin: true } },

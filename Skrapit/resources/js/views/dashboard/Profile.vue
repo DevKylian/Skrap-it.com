@@ -121,55 +121,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-8 col-xl-5">
-                        <div class="card">
-                            <div class="card-body" v-if="getLoading">
-                                <FormLoader></FormLoader>
-                            </div>
-                            <div class="card-body" v-if="!getLoading">
-                                <div class="mb-4">
-                                    <h5 class="mt-0 mb-3 font-weight-bold">
-                                        Your current package
-                                    </h5>
-                                    <p>This can change at any time, in the
-                                        <a href="" class="sdark font-weight-medium">packages section</a>.
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="mt-4">
-                                            <h6 class="mb-1">Package</h6>
-                                            <h5 class="mb-0 sred font-weight-bold">{{ getPackageTitle() }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="mt-4">
-                                            <h6 class="mb-1">Max uses</h6>
-                                            <h5 class="mb-0 font-weight-bold">{{ getUser.package.max_uses }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-auto">
-                                        <div class="mt-4">
-                                            <h6 class="mb-1">Max API</h6>
-                                            <h5 class="mb-0 font-weight-bold">{{ getUser.package.max_api }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-auto">
-                                        <div class="mt-4">
-                                            <h6 class="mb-1">Expiration date</h6>
-                                            <h5 class="mb-0 font-weight-bold">{{ getUser.expiration_date | expirationDate }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6 col-auto">
-                                        <div class="mt-4">
-                                            <h6 class="mb-1">Pricing ($)</h6>
-                                            <h5 class="mb-0 font-weight-bold">{{ getPrice() }}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

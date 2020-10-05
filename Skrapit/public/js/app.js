@@ -2188,6 +2188,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
@@ -2878,13 +2888,30 @@ var render = function() {
                                   "li",
                                   { staticClass: "dropdown-item user" },
                                   [
-                                    _c("i", { staticClass: "fad fa-cog" }),
+                                    _c("i", { staticClass: "fad fa-user" }),
                                     _vm._v(
-                                      " Settings\n                                                "
+                                      " Profile\n                                                "
                                     )
                                   ]
                                 )
                               ]),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                { attrs: { to: "/settings" } },
+                                [
+                                  _c(
+                                    "li",
+                                    { staticClass: "dropdown-item user" },
+                                    [
+                                      _c("i", { staticClass: "fad fa-cog" }),
+                                      _vm._v(
+                                        " Settings\n                                                "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "li",
@@ -2978,6 +3005,24 @@ var render = function() {
                     }
                   },
                   [_c("span", [_c("i", { staticClass: "fad fa-cubes fa-lg" })])]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              [
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: "/settings",
+                      tooltip: "Settings",
+                      flow: "right"
+                    }
+                  },
+                  [_c("span", [_c("i", { staticClass: "fad fa-cog fa-lg" })])]
                 )
               ],
               1
@@ -21216,11 +21261,21 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
   },
   name: 'Profile',
   meta: {
     title: 'Profile',
+    requiresAuth: true
+  }
+}, {
+  path: '/settings',
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Settings */ "./resources/js/views/dashboard/Settings.vue"));
+  },
+  name: 'Settings',
+  meta: {
+    title: 'Settings',
     requiresAuth: true
   }
 }, {

@@ -37,6 +37,11 @@
                                             <ul class="dropdown-menu dropdown-menu-right dropdown-shadow">
                                                 <router-link to="/profile">
                                                     <li class="dropdown-item user">
+                                                        <i class="fad fa-user"></i> Profile
+                                                    </li>
+                                                </router-link>
+                                                <router-link to="/settings">
+                                                    <li class="dropdown-item user">
                                                         <i class="fad fa-cog"></i> Settings
                                                     </li>
                                                 </router-link>
@@ -75,6 +80,11 @@
                         <li>
                             <router-link to="/packages" tooltip="Packages" flow="right">
                                 <span><i class="fad fa-cubes fa-lg"></i></span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/settings" tooltip="Settings" flow="right">
+                                <span><i class="fad fa-cog fa-lg"></i></span>
                             </router-link>
                         </li>
                         <li v-if="isAdmin">
