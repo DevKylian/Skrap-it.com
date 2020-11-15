@@ -18,22 +18,19 @@ Vue.use(Toast, options);
 
 axios.interceptors.response.use(response => {
     const token = localStorage.getItem('token');
-    if(!token && store.getters.isLogged) {
-        store.commit('logout')
-        router.push('/login');
-    }
+
+    if(!token && store.getters.isLogged) store.commit('logout')
 
     return response;
 }, error => {
     let path = '/login';
 
     switch (error.response.status) {
-        case 401: path = '/login'; break;
+        case 401: return;
         case 403: path = '/login'; break;
         default : return Promise.reject(error);
     }
 
-    store.commit('logout')
     router.push(path);
 
     return Promise.reject(error);

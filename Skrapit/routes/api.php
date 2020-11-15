@@ -55,6 +55,9 @@ Route::group([
     Route::post('checkToken', 'Laravel\AuthController@checkToken');
 
     Route::group(['middleware' => 'auth'], function(){
+        Route::group(['middleware' => 'paid'], function() {
+            Route::post( 'whitelist', 'Laravel\UserController@whitelistIP' );
+        });
         Route::post('edit-profile', 'Laravel\UserController@editProfile');
         Route::post('edit-password', 'Laravel\UserController@editPassword');
         Route::post('logout', 'Laravel\AuthController@logout');

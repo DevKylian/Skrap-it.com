@@ -17,6 +17,7 @@ mix.combine([
 // Landing CSS
 mix.combine([
     'resources/sass/app.scss',
+    'resources/sass/landing/bootstrap.css',
     'resources/sass/landing/skrapit.css',
     'resources/sass/custom.css',
 ], 'public/css/landing/main.css');

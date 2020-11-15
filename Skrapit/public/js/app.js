@@ -21131,20 +21131,14 @@ var options = {};
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toastification__WEBPACK_IMPORTED_MODULE_3__["default"], options);
 axios.interceptors.response.use(function (response) {
   var token = localStorage.getItem('token');
-
-  if (!token && _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLogged) {
-    _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('logout');
-    _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
-  }
-
+  if (!token && _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isLogged) _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('logout');
   return response;
 }, function (error) {
   var path = '/login';
 
   switch (error.response.status) {
     case 401:
-      path = '/login';
-      break;
+      return;
 
     case 403:
       path = '/login';
@@ -21154,7 +21148,6 @@ axios.interceptors.response.use(function (response) {
       return Promise.reject(error);
   }
 
-  _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('logout');
   _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push(path);
   return Promise.reject(error);
 });
@@ -21231,7 +21224,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 var routes = [{
   path: '/dashboard',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Dashboard */ "./resources/js/views/dashboard/Dashboard.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Dashboard */ "./resources/js/views/dashboard/Dashboard.vue"));
   },
   name: 'Dashboard',
   meta: {
@@ -21261,7 +21254,7 @@ var routes = [{
 }, {
   path: '/profile',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(12)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Profile */ "./resources/js/views/dashboard/Profile.vue"));
   },
   name: 'Profile',
   meta: {
@@ -21271,7 +21264,7 @@ var routes = [{
 }, {
   path: '/settings',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Settings */ "./resources/js/views/dashboard/Settings.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(13)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Settings */ "./resources/js/views/dashboard/Settings.vue"));
   },
   name: 'Settings',
   meta: {
@@ -21291,7 +21284,7 @@ var routes = [{
 }, {
   path: '/apis',
   component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Apis */ "./resources/js/views/dashboard/Apis.vue"));
+    return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ../views/dashboard/Apis */ "./resources/js/views/dashboard/Apis.vue"));
   },
   name: 'Apis',
   meta: {
@@ -21346,7 +21339,8 @@ var routes = [{
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   hashbang: false,
-  routes: routes
+  routes: routes,
+  linkActiveClass: "active"
 });
 router.afterEach(function (to, from) {
   _store_store__WEBPACK_IMPORTED_MODULE_2__["default"].commit('SET_LOADING', true);
@@ -21535,9 +21529,7 @@ var actions = {
           name: 'Login'
         });
         resolve(res);
-      })["catch"](function (err) {
-        return reject(err.response.data.errors);
-      });
+      })["catch"]();
     });
   },
   logout: function logout(_ref3) {
@@ -21556,7 +21548,7 @@ var actions = {
         _router_router__WEBPACK_IMPORTED_MODULE_0__["default"].push({
           name: 'Login'
         });
-        reject(err.response.data.errors);
+        reject(err.response.data.message);
       });
     });
   }
@@ -21650,17 +21642,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/header */ "./resources/js/helpers/header.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/store.js");
+/* harmony import */ var _router_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../router/router */ "./resources/js/router/router.js");
+
 
 
 var state = {
   token: localStorage.getItem('token') || '',
   users: [],
+  whitelistsIP: [],
   isAdmin: false,
   loading: null
 };
 var mutations = {
   SET_USER: function SET_USER(state, users) {
     state.users = users;
+  },
+  SET_WHITELISTS_IP: function SET_WHITELISTS_IP(state, ip) {
+    state.whitelistsIP = ip;
   },
   SET_TOKEN: function SET_TOKEN(state, token) {
     localStorage.setItem('token', token);
@@ -21713,6 +21711,9 @@ var getters = {
 
     return r;
   },
+  getWhitelistsIP: function getWhitelistsIP(state) {
+    return state.whitelistsIP;
+  },
   getToken: function getToken(state) {
     return state.token;
   },
@@ -21728,6 +21729,7 @@ var actions = {
     var uri = '/api/auth/me';
     axios.post(uri).then(function (res) {
       context.commit('SET_USER', res.data);
+      context.commit('SET_WHITELISTS_IP', res.data.whitelists);
       context.commit('SET_IS_ADMIN', res.data.isAdmin);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('SET_LOADING', false);
     })["catch"](function (err) {
@@ -21742,6 +21744,18 @@ var actions = {
     })["catch"](function (err) {
       console.log(err);
       _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('logout');
+    });
+  },
+  setWhitelistIP: function setWhitelistIP(context, data) {
+    var uri = '/api/auth/whitelist';
+    return new Promise(function (resolve, reject) {
+      axios.post(uri, data).then(function (res) {
+        _store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch('setUsers');
+        _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('SET_LOADING', false);
+        resolve(res);
+      })["catch"](function (err) {
+        return reject(err.response.data.errors);
+      });
     });
   }
 };

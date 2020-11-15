@@ -104,4 +104,57 @@ class Api extends Model
 
         Api::where(['user_id' => $user->id, 'package_id' => $user->package_id])->update(['status' => 1]);
     }
+
+
+    /**
+     * Return total uses for actives API
+     * @param $user
+     * @return int
+     */
+    public function getTotalUses(User $user) : int
+    {
+        $allApis = Api::where('user_id', $user->id)
+            ->where('status', '<>', 3)
+            ->where('package_id', $user->package->id)
+            ->get();
+
+        $totalUses = 0;
+        foreach($allApis as $api) $totalUses += $api->max_uses - $api->remaining_uses;
+
+        return $totalUses;
+    }
+
+    /**
+     * Return percentage of 2 values
+     * @param $a
+     * @param $b
+     * @return float
+     */
+    public function calculatePercentage($a, $b) : float
+    {
+        return (100 * $a) / $b;
+    }
+
+    /**
+     * Return percentage of remaining uses
+     * @param User $user
+     * @return float
+     */
+    public function getPercentRemainingUses(User $user) : float
+    {
+        return $this->calculatePercentage($this->getTotalUses($user), $user->package->max_uses);
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     */
+    public function is80Percent(User $user) : bool
+    {
+        if ($this->getPercentRemainingUses($user) === 80.00)
+            return true;
+
+        return false;
+    }
+
 }

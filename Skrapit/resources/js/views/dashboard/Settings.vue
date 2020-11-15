@@ -91,7 +91,8 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="list-group-item d-flex align-items-center justify-content-between px-0">
+                                    <li class="list-group-item d-flex align-items-center justify-content-between px-0"
+                                        v-if="!getLoading && getPackageTitle() !== 'Free'">
                                         <div>
                                             <span class="h6 mb-1">Api consumption alert</span>
                                             <p class="small pr-4">When you reach 80% of consumption on your APIs,
@@ -106,6 +107,55 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" v-if="!getLoading && getPackageTitle() !== 'Free'">
+                    <div class="col-sm-12 col-lg-8 col-xl-5">
+                        <div class="card">
+                            <div class="card-body" v-if="getLoading">
+                                <FormLoader></FormLoader>
+                            </div>
+                            <div class="card-body" v-if="!getLoading">
+                                <div class="mb-4">
+                                    <h5 class="mt-0 mb-3 font-weight-bold">Whitelist IP</h5>
+                                    <p>You can whitelist 10 IP address with your actual offer.<br>
+                                        When your API is disabled, only the whitelisted IP can access-it.
+                                    </p>
+                                </div>
+                                <form @submit.prevent="whitelistIP" method="POST">
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="127.0.0.1"
+                                            v-model="form.ip_address" :class="{ 'is-invalid' : errors.ip_address }">
+                                            <span class="input-group-btn">
+                                                <button class="sbtn-corner sbtn-dark" type="submit">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                                <span class="sred" v-if="errors.ip_address">{{ errors.ip_address[0] }}</span>
+                                <div class="col-12 scroll mt-4">
+                                    <ul class="list-group list-group-flush">
+                                        <li v-if="!getLoading" v-for="(whitelist) in getWhitelistsIP"
+                                            class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                                            <div>
+                                                <h5 class="font-weight-bold mb-1">
+                                                    {{ whitelist.ip_address }}
+                                                </h5>
+                                                <p class="pr-4">
+                                                    23-10-2000
+                                                </p>
+                                            </div>
+                                            <div class="align-items-end">
+                                                <i class="fad fa-trash sred"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -129,7 +179,8 @@ export default {
     computed: {
         ...mapGetters({
             getUser: 'getUsers',
-            getLoading: 'getLoading'
+            getLoading: 'getLoading',
+            getWhitelistsIP: 'getWhitelistsIP',
         }),
     },
     filters: {
@@ -138,7 +189,12 @@ export default {
         }
     },
     data() {
-        return {}
+        return {
+            form: {
+                ip_address: '',
+            },
+            errors: {},
+        }
     },
     methods: {
         getPrice() {
@@ -147,6 +203,14 @@ export default {
         },
         getPackageTitle() {
             return this.getUser.package.title === "Free" ? "Free offer" : "Custom offer"
+        },
+        whitelistIP() {
+            this.$store.dispatch('setWhitelistIP', this.form)
+            .then(res => {
+                this.$toast.success(res.data.success)
+                this.errors = {}
+            })
+            .catch(err => { if (err) this.errors = err })
         },
     },
 }

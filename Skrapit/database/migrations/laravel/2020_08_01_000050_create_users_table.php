@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('avatar')->default('user.jpg');
             $table->integer('status')->default(0);
+            $table->boolean('email_promotion')->default(1);
+            $table->boolean('consumption_alert')->default(0);
             $table->dateTime('expiration_date')->default(Carbon::today()->addDays(9999));
 
             $table->rememberToken();

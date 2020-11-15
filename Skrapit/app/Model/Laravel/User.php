@@ -52,6 +52,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Token::class);
     }
 
+    public function whitelists()
+    {
+        return $this->hasMany(Whitelist::class);
+    }
+
     /*
      *
      * Below, all the JWT default functions
@@ -177,5 +182,10 @@ class User extends Authenticatable implements JWTSubject
     public function isActivated()
     {
         return $this->status == 1;
+    }
+
+    public function hasFreeOffer()
+    {
+        return $this->package->full_access == 0;
     }
 }

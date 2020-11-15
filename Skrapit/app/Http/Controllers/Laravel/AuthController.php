@@ -187,7 +187,7 @@ class AuthController extends Controller
     public function me()
     {
         return User::where('id', auth()->user()->id)
-            ->with(['apis', 'package'])
+            ->with(['apis', 'package', 'whitelists'])
             ->first();
     }
 

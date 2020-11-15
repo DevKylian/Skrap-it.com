@@ -9,293 +9,327 @@
 
     <link rel="icon" href="/img/favicons/favicon.ico"/>
 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900%7COpen+Sans:300,400,500" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('css/landing/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/icons.css') }}">
 
 </head>
 
-<body>
-<header class="header-global">
-    <nav id="navbar-main"
-         class="navbar navbar-main navbar-expand-lg navbar-dark navbar-theme-primary headroom py-lg-2 px-lg-6">
+
+<body class="boxed-layout">
+<div class="wrapper">
+    <nav class="navbar navbar-expand-md fixed-top">
         <div class="container">
-            <a class="navbar-brand @@logo_classes" href="">
-                <div class="d-flex align-items-center">
-                    <img class="navbar-brand-dark rotate-logo" src="/img/brand/logo-white.svg" alt="Logo light">
-                    <img class="navbar-brand-light rotate-logo" src="/img/brand/icon-colors.svg" alt="Logo dark">
-                </div>
-            </a>
-            <div class="navbar-collapse collapse" id="navbar_global">
-                <div class="navbar-collapse-header">
-                    <div class="row">
-                        <div class="col-6 collapse-brand">
-                            <a class="d-flex align-items-center" href="">
-                                <img src="/img/brand/logo-colors.svg" alt="Logo dark">
-                            </a>
-                        </div>
-                        <div class="col-6 collapse-close">
-                            <a href="" class="fas fa-times" data-toggle="collapse" data-target="#navbar_global"
-                               aria-controls="navbar_global"
-                               aria-expanded="false" aria-label="Toggle navigation">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <ul class="navbar-nav navbar-nav-hover justify-content-center">
-                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#how-it-works" class="nav-link">How it works</a></li>
-                    <li class="nav-item"><a href="#packages" class="nav-link">Packages</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Documentation</a></li>
+            <img alt="Skrap-it Logo" class="header-logo" src="img/landing/brand/logo-colors.svg">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="index.html#main">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="index.html#features">How it works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="index.html#pricing">Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#faqs">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('login') }}" class="sbtn sbtn-dark animate-up-2">
+                            <i class="fad fa-sign-in mr-3"></i>Sign in
+                        </a>
+                    </li>
                 </ul>
-            </div>
-            <div class="d-none d-lg-block">
-                <a href="{{ url('login') }}" class="sbtn sbtn-border-white btn-docs animate-up-2">
-                    <i class="fad fa-sign-in-alt mr-3"></i>Login
-                </a>
-                <a href="{{ url('register') }}" class="sbtn sbtn-red btn-pricing-plan animate-up-2 ml-3">
-                    <i class="fad fa-user-plus mr-3"></i>Register
-                </a>
-            </div>
-            <div class="d-flex d-lg-none align-items-center ml-auto">
-                <button class="navbar-toggler" type="button"
-                        data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
             </div>
         </div>
     </nav>
-</header>
-<main>
-    <section class="section-header pb-7 pb-lg-11 sbg-work sbg-dark text-white">
-        <div class="container">
-            <div class="row">
-                <div class="mx-auto">
-                    <div class="alert">
-                            <span class="sbadge sbadge-green ml-2 mr-2">
-                                Story
-                            </span>
-                        <span class="font-weight-bold">Did you know that ?</span> The processor with the highest
-                        frequency is the i9-10900K with 5.30 Ghz !
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-between align-items-center mt-5 mb-5">
-                <div class="col-12 col-lg-5">
-                    <h1 class="display-1 mb-4">We've got them all !</h1>
-                    <p class="lead mb-3 mb-lg-5">Skrap-it takes care for you, to list all the processors of the
-                        Intel range.</p>
-                    <a href="#packages" class="sbtn sbtn-red btn-pricing-plan animate-up-2 mb-sm-4 mb-4">
-                        <i class="fad fa-hand-point-right fa-swap-opacity mr-3"></i>Start for Free
-                    </a>
-                    <a href="#how-it-works" class="sbtn sbtn-border-white btn-docs animate-up-2 mb-sm-4 mb-4 ml-3">
-                        <i class="fad fa-info-circle mr-3"></i>Learn more
-                    </a>
-                </div>
-                <div class="col-12 col-lg-6">
-                    <div class="input-group">
-                        <input class="form-control form-control-lg border-light" placeholder="i9-9980XE" type="text"
-                               required>
-                        <div class="input-group-prepend">
-                            <button type="submit" class="sbtn sbtn-red rounded-right"><i
-                                    class="fad fa-search fa-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="position-relative json-preview mt-3">
-                        <code>
-                            <div>
-                                <span class="ip-info-left">"name": </span>
-                                <span class="ip-info-right">Intel® Core™ i9-9980XE Extreme Edition
-                                        Processor</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"lithography": </span>
-                                <span class="ip-info-right">14 nm</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"base_frequency": </span>
-                                <span class="ip-info-right">3.00 GHz</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"boost_frequency": </span>
-                                <span class="ip-info-right">4.40 GHz</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"cores": </span>
-                                <span class="ip-info-right">18</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"threads": </span>
-                                <span class="ip-info-right">36</span>
-                            </div>
-                            <div>
-                                <span class="ip-info-left">"cache": </span>
-                                <span class="ip-info-right">24.75 MB Intel® Smart Cache</span>
-                            </div>
-                        </code>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section section-md pb-0 bg-soft">
-        <div class="container z-2 mt-n9 mt-lg-n11">
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                    <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
-                        <div class="card-header text-center pb-0">
-                            <div class="icon icon-shape sdark sbg-soft-dark rounded-circle mb-3"><span
-                                    class="fad fa-cloud-upload-alt"></span></div>
-                            <h4 class="text-black mt-3">Up-to-date</h4>
-                            <p>Every day our API is updated for maximum reliability</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                    <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
-                        <div class="card-header text-center pb-0">
-                            <div class="icon icon-shape sorange sbg-soft-orange rounded-circle mb-3"><span
-                                    class="fad fa-server"></span></div>
-                            <h4 class="text-black mt-3">Reliable</h4>
-                            <p>Our API is reliable and robust, it is hosted on different servers</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                    <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
-                        <div class="card-header text-center pb-0">
-                            <div class="icon icon-shape sred sbg-soft-red rounded-circle mb-3"><span
-                                    class="fad fa-bolt"></span></div>
-                            <h4 class="text-black mt-3">Very Fast</h4>
-                            <p>No breaks ! Receive the result of your search in less than 40ms</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="card shadow-soft bg-white border-light animate-up-3 text-gray py-4 mb-5 mb-lg-0">
-                        <div class="card-header text-center pb-0">
-                            <div class="icon icon-shape sdark sbg-soft-dark rounded-circle mb-3"><span
-                                    class="fad fa-badge-percent"></span></div>
-                            <h4 class="text-black mt-3">Lifetime Free</h4>
-                            <p>We provide you with a first, high-performance free API offer</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section section-lg bg-soft">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8 text-center">
-                        <span class="sbadge sbadge-red badge-pill badge-lg mb-4">
-                            <i class="fad fa-fire-alt mr-2"></i>
-                            New Features
-                        </span>
-                    <h2 class="h1">Very soon, the AMD API will be added</h2>
-                    <p class="mt-4">We want to gather as much information as possible in a single API.<br>
-                        Packages will be reviewed, and you will be notified !<br>
-                        Subscription is currently cheaper, and will remain cheaper for future versions for those who
-                        subscribe now.</p>
-                    <a href="#packages" class="sbtn sbtn-soft-dark animate-up-2 mt-3 mb-4 mb-lg-0">
-                        <i class="fad fa-check mr-3"></i>
-                        See all packages
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section pb-11 pb-lg-12 section-lg sbg-red text-center text-white">
-        <div class="container">
-            <div class="row justify-content-center mb-4 mb-lg-6">
-                <div class="col-12">
-                    <h1 class="display-3 mb-4 mb-lg-5">Some statistics for you ...</h1>
-                    <div class="row text-white">
-                        <div class="col-12 col-lg-4 px-md-0 mb-4 mb-lg-0">
-                            <div class="card-body text-center sbg-red border-right sborder-dark py-4">
-                                <h2 class="font-weight-bold"><span class="h1 mr-2" id="totalCpus">2970</span></h2>
-                                <span class="h5 font-weight-normal">Intel CPU</span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-4 px-md-0 mb-4 mb-lg-0">
-                            <div class="card-body text-center sbg-red border-right sborder-dark py-4">
-                                <h2 class="font-weight-bold"><span class="h1 mr-2">+5000</span></h2> <span
-                                    class="h5 font-weight-normal">Daily use</span>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-4 px-md-0">
-                            <div class="card-body text-center sbg-red py-4">
-                                <h2 class="font-weight-bold"><span class="h1 mr-2">+1500</span></h2> <span
-                                    class="h5 font-weight-normal">Users</span>
+    <div class="main" id="main">
+        <div class="home">
+            <div class="container">
+                <div class="hero-content wow fadeIn">
+                    <div class="flex-split">
+                        <div class="container">
+                            <div class="flex-inner flex-inverted align-center">
+                                <div class="sk-image">
+                                    <img alt="Feature" class="img-fluid" src="img/landing/head.svg">
+                                </div>
+                                <div class="sk-text">
+                                    <div class="left-content">
+                                        <div class="sk2">
+                                            <h4>A powerfull CPU API</h4>
+                                            <h2>We've got them all !</h2>
+                                            <p>We make sure that the api is as reliable as possible. You will find all the CPUs of the Intel range, without exception.</p>
+                                        </div>
+                                        <div class="sbtn sbtn-soft-dark animate-up-2">
+                                            Learn more<i class="fad fa-info-circle ml-3"></i>
+                                        </div>
+                                        <div class="sbtn sbtn-red animate-up-2">
+                                            Start for Free<i class="fad fa-arrow-alt-circle-right ml-3"></i>
+                                        </div>
+                                    </div>
+                                    <p class="condition_txt">No credit card required*</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <div class="section pt-0">
-        <div class="container mt-n9 mt-lg-n12 z-2">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-10">
-                    <div class="position-relative">
-                        <img class="shadow-box rounded animate-up-5" src="/img/dashboard.png"
-                             alt="SaaS preview">
+        <div class="sk">
+            <div class="container">
+                <div class="sk-inner">
+                    <div class="sk-flex">
+                        <div class="sk2">
+                            <h4 class="section-title sorange">Our arguments</h4>
+                            <h2>This is why our API is certainly the best.</h2>
+                            <p>Would you like to test it before registering ?<br>It's possible, <a href="#try" class="font-weight-bold">Try it here !</a></p>
+                        </div>
+                    </div>
+                    <div class="sk-flex">
+                        <div class="sk1 animate-up-2">
+                            <div class="sk-item sbg-soft-dark">
+                                <div class="sk-icon">
+                                    <div class="sk-img"><img alt="Feature" src="img/landing/free.svg" width="80"></div>
+                                </div>
+                                <div class="sk-text">
+                                    <h3>Free Offer</h3>
+                                    <p>Free lifetime offer, but with limited data.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sk1 animate-up-2">
+                            <div class="sk-item sbg-soft-orange">
+                                <div class="sk-icon">
+                                    <div class="sk-img"><img alt="Feature" src="img/landing/up-to-date.svg" width="80"></div>
+                                </div>
+                                <div class="sk-text">
+                                    <h3>Up-to-date</h3>
+                                    <p>Updated in real time to provide reliable data.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sk1 animate-up-2">
+                            <div class="sk-item sbg-soft-red">
+                                <div class="sk-icon">
+                                    <div class="sk-img"><img alt="Feature" src="img/landing/reliable.svg" width="80"></div>
+                                </div>
+                                <div class="sk-text">
+                                    <h3>Reliable</h3>
+                                    <p>Reliable and robust, it is hosted on different servers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ft-flex" id="features">
+            <div class="container">
+                <div class="ft-inner align-center">
+                    <div class="ft-image wow"><img alt="Feature" class="img-fluid" src="img/landing/steps.svg"></div>
+                    <div class="ft-text">
+                        <div class="ft-content">
+                            <h2>How it works ?</h2>
+                            <p>We know that you prefer simplicity, and we took the time to do it right.</p>
+                            <ul>
+                                <li>
+                                    <img src="img/landing/one.svg" alt="Steps One" class="w-20p"> Sign up on our platform.
+                                </li>
+                                <li>
+                                    <img src="img/landing/two.svg" alt="Steps Two" class="w-20p"> Choose the offer that suits you best.
+                                </li>
+                                <li>
+                                    <img src="img/landing/three.svg" alt="Steps Three" class="w-20p"> Copy your key, and access it !
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sk-stats">
+            <div class="container-s">
+                <div class="row text-center">
+                    <div class="col-sm-12">
+                        <div class="intro">
+                            <h4 class="section-title sorange">OUR RESULTS</h4>
+                            <h2>Statistics & Facts</h2>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="counter-up">
+                            <div class="counter-icon"><img alt="Icon" src="img/landing/cpu.svg"></div>
+                            <h3>+<span class="counter">2737</span></h3>
+                            <div class="counter-text">
+                                <h2>CPU's</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="counter-up">
+                            <div class="counter-icon"><img alt="Icon" src="img/landing/uses.svg"></div>
+                            <h3>+<span class="counter">8500</span></h3>
+                            <div class="counter-text">
+                                <h2>Daily Uses</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="counter-up">
+                            <div class="counter-icon"><img alt="Icon" src="img/landing/visits.svg"></div>
+                            <h3>+<span class="counter">12000</span></h3>
+                            <div class="counter-text">
+                                <h2>Monthly Visits</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="counter-up">
+                            <div class="counter-icon"><img alt="Icon" src="img/landing/api.svg"></div>
+                            <h3>+<span class="counter">60</span></h3>
+                            <div class="counter-text">
+                                <h2>Spec's for each CPU</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pricing-section" id="pricing">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-sm-10 offset-sm-1">
+                        <div class="pricing-intro text-center">
+                            <h4 class="section-title sorange">Our prices</h4>
+                            <h1>Simple &amp; Affordable Prices.</h1>
+                            <p>Our offers have been created to adapt as much as possible to your requests.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 offset-lg-1 col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="card mb-5 mb-lg-6 px-2">
+                                    <div class="card-header border-light px-4 position-relative">
+                                        <div class="d-flex mb-3 mt-5">
+                                            <h2 class="display-2 mb-0">Free</h2> <span class="h6 font-weight-normal align-self-end">/life</span>
+                                        </div>
+                                        <h4 class="mb-3 text-black">Economic</h4>
+                                        <p class="text-muted mb-0">A limited offer, but it's free and for life !<br>Not convinced yet ?
+                                            <a class="font-weight-bold" href="#try">Try it !</a></p>
+                                    </div>
+                                    <div class="card-body pt-3">
+                                        <ul class="list-group simple-list">
+                                            <li class="list-group-item font-weight-normal"><span class="sdark"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">1.000</span> uses</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sdark"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">1</span> API</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sdark"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">Limited</span> access</li>
+                                            <li class="list-group-item font-weight-normal">
+                                                <span class="sdark"><i class="fas fa-times"></i></span> <del>Whitelist IP</del>
+                                            </li>
+                                            <li class="list-group-item font-weight-normal">
+                                                <span class="sdark"><i class="fas fa-times"></i></span> <del>Quota alert by email</del>
+                                            </li>
+                                            <li class="list-group-item font-weight-normal">
+                                                <span class="sdark"><i class="fas fa-times"></i></span> <del>Priority on support</del>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer px-4 pb-4">
+                                        <a class="btn btn-block sbtn-dark animate-up-2" href="#">Start for Free <span class="icon icon-xs"><i class="fas fa-arrow-right ml-3"></i></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6">
+                                <div class="card mb-5 mb-lg-6 px-2">
+                                    <div class="card-header border-light px-4 position-relative">
+                                        <div class="d-flex mb-3 mt-5 sdark">
+                                            <span class="h5 mb-0">$</span><span class="price display-2 sred mb-0">1.50</span> <span class="h6 font-weight-normal align-self-end" data-id="duration">/month</span>
+                                        </div>
+                                        <h4 class="mb-3 text-black">Custom</h4>
+                                        <p class="text-muted  mb-0">This offer starts at $1.50, <br>It's up to you to customize it afterwards !</p>
+                                    </div>
+                                    <div class="card-body pt-3">
+                                        <ul class="list-group simple-list">
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">1k-100k</span> uses</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">1-100</span> API</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">Full</span> access</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span> <span class="font-weight-bolder">Whitelist 10</span> IP</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span>Quota alert by email</li>
+                                            <li class="list-group-item font-weight-normal"><span class="sred"><i class="fas fa-check"></i></span>Priority on support</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer px-4 pb-4">
+                                        <a class="btn btn-block sbtn-red animate-up-2" href="#">Register now <span class="icon icon-xs"><i class="fas fa-arrow-right ml-3"></i></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="refund-txt">* No credit card required for the Free offer</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <section class="section" id="how-it-works">
+    <div class="yd_faqs" id="faqs">
         <div class="container">
-            <div class="row justify-content-center mb-4 mb-lg-5">
-                <div class="col-12 col-md-8 text-center">
-                    <h2 class="h1">How it works ?</h2>
-                    <p class="lead mt-3">We make sure that our API is the easiest to use !<br>
-                        However, if you need help, please do not hesitate to contact us.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="tab-content" id="tabcontentexample-3">
-                        <div class="tab-pane fade active show" id="find-space" role="tabpanel"
-                             aria-labelledby="tab-find-space">
-                            <div class="row">
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="card border-light mb-4 mb-lg-0 text-center">
-                                        <div class="card-body p-4 px-xl-4 py-xl-6">
-                                            <div
-                                                class="icon icon-shape icon-lg sdark sbg-soft-dark mb-4 rounded-circle">
-                                                <span class="fad fa-user"></span></div>
-                                            <h3 class="h5 my-3">1. Create your account</h3>
-                                            <p>When you create your account, a validation email will be sent to you.
+            <div class="faq_inner">
+                <div class="col-md-10 offset-md-1">
+                    <div class="faq_intro">
+                        <h2>Frequently Asked Questions.</h2>
+                        <p>Here are the most frequently asked questions.</p>
+                        <h5>Still have questions ? </h5><a class="font-weight-bold" href="">Contact us</a>
+                    </div>
+                    <div id="accordion">
+                        <div class="row">
+                            <div class="col-md-6 custompadding">
+                                <div class="mb-0">
+                                    <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                                        <a class="card-title">What is Skrap-it ?</a>
+                                    </div>
+                                    <div aria-labelledby="headingOne" class="collapse" data-parent="#accordion" id="collapseOne">
+                                        <div class="card-body">
+                                            <p>Skrap-it is a platform that gives you access to an API that contains all the processors of the Intel range.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 custompadding">
+                                <div class="mb-0">
+                                    <div class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+                                        <a class="card-title">Is the free offer really free ?</a>
+                                    </div>
+                                    <div aria-labelledby="headingTwo" class="collapse" data-parent="#accordion" id="collapseTwo">
+                                        <div class="card-body">
+                                            <p>The offer is completely free, just log in, choose the offer and that's it ! Your credit card information is not required.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 custompadding">
+                                <div class="mb-0">
+                                    <div class="card-header collapsed" data-toggle="collapse" href="#collapseThree">
+                                        <a class="card-title">What more does the custom offer ?</a>
+                                    </div>
+                                    <div aria-labelledby="headingThree" class="collapse" data-parent="#accordion" id="collapseThree">
+                                        <div class="card-body">
+                                            <p>The free api only gives you few information about the processors, while the custom offer unlocks everything. Also, get up to 100.000 uses per month, and have a maximum of 100 api's.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="card border-light mb-4 mb-lg-0 text-center">
-                                        <div class="card-body p-4 px-xl-4 py-xl-6">
-                                            <div
-                                                class="icon icon-shape icon-lg sorange sbg-soft-orange mb-4 rounded-circle">
-                                                <span class="fad fa-box-open"></span></div>
-                                            <h3 class="h5 my-3">2. Choose a package</h3>
-                                            <p>According to your desire and your means, choose a package that will
-                                                best meet your needs.</p>
-                                        </div>
+                            </div>
+                            <div class="col-md-6 custompadding">
+                                <div class="mb-0">
+                                    <div class="card-header collapsed" data-toggle="collapse" href="#collapseFour">
+                                        <a class="card-title">How do I access API ?</a>
                                     </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="card border-light mb-4 mb-lg-0 text-center">
-                                        <div class="card-body p-4 px-xl-4 py-xl-6">
-                                            <div
-                                                class="icon icon-shape icon-lg sred sbg-soft-red mb-4 rounded-circle">
-                                                <span class="fad fa-key"></span></div>
-                                            <h3 class="h5 my-3">3. Generate your key</h3>
-                                            <p>Once you have chosen your offer, you will need to generate your api
-                                                key, so you can then use it!</p>
+                                    <div aria-labelledby="headingThree" class="collapse" data-parent="#accordion" id="collapseFour">
+                                        <div class="card-body">
+                                            <p>We put at your disposal a complete documentation, I invite you to consult it. For any other question, please do not hesitate to contact us.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -305,265 +339,59 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="section-header sbg-dark text-white" id="packages">
+    </div>
+    <div class="yd_cta_box" id="try">
         <div class="container">
-            <div class="row justify-content-center mb-3">
-                <div class="col-12 col-md-10 text-center">
-                    <h1 class="display-2 mb-3">Let us convince you !</h1>
-                    <p class="lead px-md-5">You're not convinced ? Contact us and together we will draw up a
-                        personalised quotation!</p>
-                </div>
-            </div>
-            <div class="row mb-5 mb-lg-6">
-                <div class="col">
-                    <div class="d-flex align-items-center justify-content-center"> <span
-                            class="h5 text-white font-weight-normal mr-4 mt-2">Monthly</span>
-                        <div class="custom-control custom-switch switch-lg"><input type="checkbox"
-                                                                                   class="custom-control-input"
-                                                                                   id="billingSwitch"
-                                                                                   data-toggle="price"
-                                                                                   data-target=".price"> <label
-                                class="custom-control-label text-gray font-weight-normal"
-                                for="billingSwitch"></label></div>
-                        <span
-                            class="h5 text-white font-weight-normal ml-1 mt-2">Annual</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row text-gray">
-                <div class="col-12 col-lg-4">
-                    <div class="card shadow-soft mb-5 mb-lg-6 px-2">
-                        <div class="card-header border-light px-4 position-relative">
-                            <div class="d-flex mb-3 mt-5"><span class="display-2 mb-0">Free</span> <span
-                                    class="h6 font-weight-normal align-self-end">/lifetime</span></div>
-                            <h4 class="mb-3 text-black">Economic</h4>
-                            <p class="font-weight-normal mb-0">Do you know how to satisfy yourself just a little?
-                                This offer is made for you !</p>
-                        </div>
-                        <div class="card-body pt-3">
-                            <ul class="list-group simple-list">
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            1.000</span> uses
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Limited</span> access
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Maximum 1 API</span></li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-times"></i></span>
-                                    <del>Whitelist IP</del>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-times"></i></span>
-                                    <del>Graphical statistics
-                                        available
-                                    </del>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-times"></i></span>
-                                    <del>Quota alert by email</del>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-times"></i></span>
-                                    <del>Priority access to new
-                                        releases
-                                    </del>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sdark"><i
-                                            class="fas fa-times"></i></span>
-                                    <del>Priority on support</del>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-dark animate-up-2">
-                                Start for Free
-                                <span class="icon icon-xs">
-                                    <i class="fas fa-arrow-right ml-3"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card shadow-soft mb-5 mb-lg-6">
-                        <div class="card-header border-light px-4 position-relative">
-                                <span
-                                    class="sbadge-price sbadge-soft-orange badge-pill badge-lg position-absolute right-3">
-                                    -40%
-                                </span>
-                            <div class="d-flex mb-3 mt-5 text-primary"><span class="h5 mb-0">$</span><span
-                                    class="price display-2 sorange mb-0" data-annual="25" data-monthly="3">3</span>
-                                <span class="h6 font-weight-normal align-self-end" data-id="duration">/month</span>
-                            </div>
-                            <h4 class="mb-3 text-black">Standard</h4>
-                            <p class="font-weight-normal mb-0">The offer that everyone loves! Low price, and
-                                efficient !</p>
-                        </div>
-                        <div class="card-body pt-3">
-                            <ul class="list-group simple-list">
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            3.000</span> uses
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Full</span> access
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Maximum 3 API</span>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Whitelist 3 IP</span>
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span>Graphical statistics available <span
-                                        class="text-muted text-italic">(soon)</span></li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span>Quota alert by email
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span>Priority access to new releases
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sorange"><i
-                                            class="fas fa-check"></i></span>Priority on support
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-orange animate-up-2">
-                                Start with Standard
-                                <span class="icon icon-xs ml-3">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <div class="card shadow-soft border-light mb-5 mb-lg-6">
-                        <div class="card-header border-light px-4 position-relative">
-                                <span
-                                    class="sbadge-price sbadge-soft-red badge-pill badge-lg position-absolute right-3">
-                                    -70%
-                                </span>
-                            <div class="d-flex mb-3 mt-5"><span class="h5 mb-0">$</span><span
-                                    class="price display-2 sred mb-0" data-annual="65" data-monthly="8">8</span>
-                                <span class="h6 font-weight-normal align-self-end" data-id="duration">/month</span>
-                            </div>
-                            <h4 class="mb-3 text-black">Premium</h4>
-                            <p class="font-weight-normal mb-0">You're unstoppable, you've got the most powerful
-                                offer !</p>
-                        </div>
-                        <div class="card-body pt-3">
-                            <ul class="list-group simple-list">
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            10.000</span> uses
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Full</span> access
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Maximum 10 API</span></li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span><span class="font-weight-bolder">
-                                            Whitelist 10 IP</span></li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span>Graphical statistics available <span
-                                        class="text-muted text-italic">(soon)</span></li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span>Quota alert by email
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span>Priority access to new releases
-                                </li>
-                                <li class="list-group-item font-weight-normal"><span class="sred"><i
-                                            class="fas fa-check"></i></span>Priority on support
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-footer px-4 pb-4">
-                            <a href="{{ url('dashboard/packages') }}" class="sbtn btn-block sbtn-red animate-up-2">
-                                Start with Pro
-                                <span class="icon icon-xs ml-3">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
-                            </a>
+            <div class="cta_box">
+                <div class="cta_box_inner">
+                    <div class="col-sm-12 col-md-12">
+                        <h4 class="section-title sorange">Try it without registering</h4>
+                        <h2>Want to test it without registering ?<br>Request a test API by email !</h2>
+                        <div class="form">
+                            <form accept-charset="UTF-8" action="" class="subscribe-form" id="form" method="post" name="form">
+                                <input class="mail" id="email" name="email" placeholder="Enter email address" type="email">
+                                <input class="submit-button" type="submit" value="Send">
+                            </form>
+                            <div id="response"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="section bg-soft">
-        <div class="container">
+    </div>
+    <div class="footer">
+        <div class="container sdark">
             <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="mb-4">Dare quality, Join us !</h2>
-                    <p class="lead">Join over <span class="font-weight-bolder">1.500+</span> users</p><a
-                        href="#" class="icon icon-lg text-gray mr-3"></a>
-                </div>
-                <div class="col-12 text-center">
-                    <a href="#packages">
-                        <span class="sbtn sbtn-red animate-up-2">
-                            <i class="fad fa-hand-point-right mr-3"></i>Start for Free
-                        </span>
+                <div class="col text-center">
+                    <a class="footer-brand" href="">
+                        <img alt="Skrap-it Logo" class="footer-logo" src="img/landing/brand/logo-colors.svg">
                     </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <footer class="footer pb-4 sbg-dark text-white">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center"><a class="footer-brand" href=""><img
-                            src="/img/brand/logo-white.svg" alt="Skrap-it"></a>
-                    <ul class="list-inline list-group-flush list-group-borderless mb-0">
+                    <ul class="list-inline sdark list-group-flush list-group-borderless mb-0 mt-4">
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Home</a></li>
+                            <a href="" class="sdark">Home</a></li>
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Login</a></li>
+                            <a href="" class="sdark">Login</a></li>
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Register</a></li>
+                            <a href="" class="sdark">Register</a></li>
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Prices</a></li>
+                            <a href="" class="sdark">Prices</a></li>
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Terms</a></li>
+                            <a href="" class="sdark">Terms</a></li>
                         <li class="list-inline-item px-0 px-sm-2">
-                            <a href="" target="_blank"
-                               class="text-white">Contact</a></li>
+                            <a href="" class="sdark">Contact</a></li>
                     </ul>
                 </div>
             </div>
-            <hr class="mb-5">
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col mb-4 mb-md-0">
                     <div class="d-flex text-center justify-content-center align-items-center">
-                        <p class="small text-white mb-0">&copy; Skrap-it </a><span class="current-year">2020</span>.
-                            All rights
-                            reserved. by <a href="https://www.softilex.eu" target="_blank">Softilex</a></p>
+                        <p class="small mb-0">© Skrap-it <span class="current-year">2020</span>. All rights reserved. by <a class="font-weight-bold" href="https://www.softilex.eu">Softilex</a></p>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-</main>
+    </div>
+</div>
 <script src="{{ mix('js/assets/global.js') }}"></script>
 </body>
 

@@ -1402,6 +1402,10 @@ a.text-dark:hover, a.text-dark:focus {
     background: rgba(255, 255, 255, .2);
     color: #fff
 }
+.active {
+    background: rgba(255, 255, 255, .2);
+    color: #fff
+}
 .menu ul li a i {
     color: #fff;
     font-size: 24px

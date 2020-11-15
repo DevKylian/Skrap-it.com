@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Scraping;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ConsumptionMailJob;
+use App\Mail\ConsumptionMail;
 use App\Model\Laravel\Api;
+use App\Model\Laravel\User;
 use App\Model\Scraping\Intel;
 use App\Model\Scraping\Quantities;
 
@@ -38,6 +41,10 @@ class ApiController extends Controller
             return response()->json(['errors' => ['api' => ['Your API has reached 0 usage.']]], 402);
 
         $this->api->decrement('remaining_uses');
+
+        $author = User::where('id', $this->api->user_id)->first();
+
+        if ($this->api->is80Percent($author) && $author->consumption_alert) dispatch(new ConsumptionMailJob($author));
 
         if($this->api->isFullAccess($this->key))
             return Intel::where('name', 'LIKE', "%{$name}%")->get();

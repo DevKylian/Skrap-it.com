@@ -48,7 +48,7 @@ const actions = {
                 router.push({name: 'Login'})
                 resolve(res)
             })
-            .catch(err => reject(err.response.data.errors))
+            .catch()
         })
     },
 
@@ -66,7 +66,7 @@ const actions = {
                 .catch(err => {
                     localStorage.removeItem('token')
                     router.push({name: 'Login'})
-                    reject(err.response.data.errors)
+                    reject(err.response.data.message)
                 })
         })
     }

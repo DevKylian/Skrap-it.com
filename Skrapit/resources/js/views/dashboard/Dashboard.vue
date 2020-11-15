@@ -245,7 +245,7 @@ export default {
             }, 2000);
         },
         percentage(partialValue, totalValue) {
-            return Math.round((100 * partialValue) / totalValue);
+            return (100 * partialValue) / totalValue;
         },
         percentageApiUsage() {
             return (this.getUser.apis.length <= 0) ? 0 : this.percentage(this.$store.getters.getApiUsage, this.getUser.package.max_uses)

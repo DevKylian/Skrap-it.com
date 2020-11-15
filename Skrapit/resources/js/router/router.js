@@ -25,6 +25,7 @@ const router = new VueRouter({
     mode: 'history',
     hashbang: false,
     routes,
+    linkActiveClass: "active"
 })
 
 router.afterEach((to, from) => {

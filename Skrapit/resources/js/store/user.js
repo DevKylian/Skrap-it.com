@@ -1,9 +1,11 @@
 import {authHeader} from "../helpers/header";
 import store from "./store";
+import router from "../router/router";
 
 const state = {
     token: localStorage.getItem('token') || '',
     users: [],
+    whitelistsIP: [],
     isAdmin: false,
     loading: null,
 }
@@ -11,6 +13,9 @@ const state = {
 const mutations = {
     SET_USER: (state, users) => {
         state.users = users
+    },
+    SET_WHITELISTS_IP: (state, ip) => {
+        state.whitelistsIP = ip
     },
     SET_TOKEN(state, token) {
         localStorage.setItem('token', token);
@@ -57,6 +62,9 @@ const getters = {
             if(state.users.apis[i].status !== 3 && (state.users.apis[i].package_id === state.users.package_id)) r++
         return r;
     },
+    getWhitelistsIP(state) {
+        return state.whitelistsIP;
+    },
     getToken(state) {
         return state.token;
     },
@@ -75,6 +83,7 @@ const actions = {
         axios.post(uri)
             .then(res => {
                 context.commit('SET_USER', res.data)
+                context.commit('SET_WHITELISTS_IP', res.data.whitelists)
                 context.commit('SET_IS_ADMIN', res.data.isAdmin)
                 store.commit('SET_LOADING', false);
             })
@@ -94,7 +103,20 @@ const actions = {
                 console.log(err)
                 store.dispatch('logout')
             })
-    }
+    },
+    setWhitelistIP(context, data) {
+        let uri = '/api/auth/whitelist'
+
+        return new Promise((resolve, reject) => {
+            axios.post(uri, data)
+                .then(res => {
+                    store.dispatch('setUsers');
+                    store.commit('SET_LOADING', false);
+                    resolve(res)
+                })
+                .catch(err => reject(err.response.data.errors))
+        })
+    },
 }
 
 export default {
