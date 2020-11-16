@@ -20,6 +20,7 @@ class PackageSeeder extends Seeder
                 'max_api' => "1",
                 'days' => "9999",
                 'graphics' => false,
+                'whitelist' => false,
                 'quota_alert' => false,
                 'full_access' => false,
             ]

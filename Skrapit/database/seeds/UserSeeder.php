@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
                 'isAdmin' => true,
                 'email' => "k@k.k",
                 'password' => bcrypt('k'),
+                'status' => 1,
                 'package_id' => 1,
             ]
         ];

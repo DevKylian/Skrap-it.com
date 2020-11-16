@@ -25,7 +25,7 @@
                                         Your current package
                                     </h5>
                                     <p>This can change at any time, in the
-                                        <a href="" class="sdark font-weight-medium">packages section</a>.
+                                        <router-link to="packages" class="sdark font-weight-medium">packages section</router-link>.
                                     </p>
                                 </div>
                                 <div class="row">
@@ -72,7 +72,7 @@
                                         Options & Notifications
                                     </h5>
                                     <p>Some options are only available with the
-                                        <a href="#" class="sdark font-weight-medium">custom offer</a>.
+                                        <router-link to="packages" class="sdark font-weight-medium">custom offer</router-link>.
                                     </p>
                                 </div>
                                 <ul class="list-group">
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" v-if="!getLoading && getPackageTitle() !== 'Free'">
+                <div class="row" v-if="!getLoading && getUser.package.whitelist">
                     <div class="col-sm-12 col-lg-8 col-xl-5">
                         <div class="card">
                             <div class="card-body" v-if="getLoading">

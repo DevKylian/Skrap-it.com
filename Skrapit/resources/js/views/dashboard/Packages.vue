@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7 col-xl-6">
+                    <div class="col-lg-7 col-xl-4">
                         <div class="card shadow-soft mb-5 mb-lg-6 px-2">
                             <div class="card-header border-light px-4 position-relative">
                                 <div class="d-flex mb-3 mt-5 text-primary"><span class="h5 mb-0">$</span><span
@@ -96,7 +96,7 @@
                             <div class="card-footer px-4 pb-4">
                                 <a href="#" @click="subscribePackage(false)"
                                    class="btn btn-block sbtn-red animate-up-2">
-                                    Start
+                                    Subscribe
                                     <span class="icon icon-xs">
                                         <i class="fas fa-arrow-right ml-3"></i>
                                     </span>
